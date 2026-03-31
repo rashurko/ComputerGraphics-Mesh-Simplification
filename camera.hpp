@@ -85,11 +85,11 @@ class Camera {
 
                 glm::mat4 rotLocal = glm::mat4(1.0f);
                 rotLocal = glm::rotate(rotLocal, -glm::radians(xoffset), ourModel.getLocalY());
-                //rotLocal = glm::rotate(rotLocal, -glm::radians(yoffset), ourModel.getLocalX());
+                rotLocal = glm::rotate(rotLocal, glm::radians(yoffset), ourModel.getLocalX());
 
                 // change the local axes
                 ourModel.setLocalX(glm::normalize(glm::vec3(rotLocal * glm::vec4(ourModel.getLocalX(), 1.0f))));
-                //ourModel.setLocalY(glm::normalize(glm::vec3(rotLocal * glm::vec4(ourModel.getLocalY(), 1.0f))));
+                ourModel.setLocalY(glm::normalize(glm::vec3(rotLocal * glm::vec4(ourModel.getLocalY(), 1.0f))));
             }
         }
         // whenever user scrolls the scroll wheel the camera "zooms" in/out

@@ -6,6 +6,10 @@
 
 #include "stb_image.h"
 #include "OBJ_Loader.h"
+#include "imgui/imgui.h"
+#include "imgui/backends/imgui_impl_glfw.h"
+#include "imgui/backends/imgui_impl_opengl3.h"
+#include "portable-file-dialogs.h"
 
 #include "shader.hpp"
 #include "model.hpp"
@@ -39,6 +43,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 // process the mouse position
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
+// process the mouse button
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 // Settings
@@ -58,12 +63,10 @@ float camSpeed = 2.5f;
 // light position
 glm::vec3 lightPos(0.2f, 0.5f, 1.5f);
 
-// Viriables
+// Variables
 // ---------
-
 // model transformation matrix of the imported model
 glm::mat4 model = glm::mat4(1.0f);
-
 
 // times
 float deltaTime = 0.0f; // time between the current frame and the last frame
@@ -106,6 +109,14 @@ int main () {
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 
+    // Setup ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 450 core");
+
     // glad: load all OpenGl function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -134,6 +145,12 @@ int main () {
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
+
+        // ImGui: new frame
+        // ----------------
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
 
         // Process the inputs
         // ------------------
@@ -172,11 +189,41 @@ int main () {
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         ourModel.Draw(modelShader);
 
+
+        if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
+            ImGui::OpenPopup("context_menu");
+        }
+
+        if (ImGui::BeginPopup("context_menu")) {
+            if (ImGui::MenuItem("Load")) {
+                // trigger the pfd file dialog
+                auto dialog = pfd::open_file("Select a 3D Model", "./models", {"OBJ Files", "*.obj"});
+                // if the user selected a file, load the model
+                if (!dialog.result().empty()) {
+                    // TODO: delete previous model from the memory
+                    std::string newFilePath = dialog.result()[0];  
+                    ourModel = Model(newFilePath);
+                    ourModelPtr = &ourModel;
+                }
+            }
+            ImGui::EndPopup();
+        }
+
+
+        ImGui::Render();
+        // ImGui: render ImGui
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    // ImGui: cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     // glfw: terminate, clearing all previously allocated GLFW resources
     // -----------------------------------------------------------------

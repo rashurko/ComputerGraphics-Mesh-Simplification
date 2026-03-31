@@ -1,0 +1,3 @@
+/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build/CMakeFiles/main.dir
+/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build/CMakeFiles/edit_cache.dir
+/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build/CMakeFiles/rebuild_cache.dir
