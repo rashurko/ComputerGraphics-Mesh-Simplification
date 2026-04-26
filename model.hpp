@@ -3,8 +3,11 @@
 
 #include <string>
 #include <vector>
+#include <cmath>
+#include <cstring>
+#include <unordered_map>
 
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -14,6 +17,7 @@
 
 #include "shader.hpp"
 #include "mesh.hpp"
+#include "simplification.hpp"
 
 class Model {
     public:
@@ -25,6 +29,87 @@ class Model {
             for (unsigned int i = 0; i < meshes.size(); i++) {
                 meshes[i].Draw(shader);
             }
+        }
+
+        void loadFromPath(const std::string& path) {
+            loadModel(path);
+        }
+
+        void setSimplificationMode(SimplificationMode mode) {
+            simplifier.setMode(mode);
+            pendingCollapses = 0;
+            rebuildRenderMeshesFromCurrentTopology();
+        }
+
+        void resetSimplification() {
+            simplifier.reset();
+            pendingCollapses = 0;
+            rebuildRenderMeshesFromCurrentTopology();
+        }
+
+        void queueCollapseBatch(int steps) {
+            if (steps > 0) {
+                pendingCollapses += steps;
+            }
+        }
+
+        bool processPendingCollapses(int maxStepsPerFrame) {
+            if (pendingCollapses <= 0 || maxStepsPerFrame <= 0) {
+                return false;
+            }
+
+            if (simplifier.mode() == SimplificationMode::Original) {
+                pendingCollapses = 0;
+                return false;
+            }
+
+            bool changed = false;
+            const int stepsThisFrame = std::min(pendingCollapses, maxStepsPerFrame);
+            for (int i = 0; i < stepsThisFrame; ++i) {
+                if (!simplifier.applyOneStep()) {
+                    pendingCollapses = 0;
+                    break;
+                }
+                pendingCollapses--;
+                changed = true;
+            }
+
+            if (changed) {
+                rebuildRenderMeshesFromCurrentTopology();
+            }
+
+            return changed;
+        }
+
+        int pendingCollapseCount() const {
+            return pendingCollapses;
+        }
+
+        SimplificationMode currentMode() const {
+            return simplifier.mode();
+        }
+
+        const char* currentModeName() const {
+            switch (simplifier.mode()) {
+            case SimplificationMode::Original:
+                return "Original";
+            case SimplificationMode::Random:
+                return "Random";
+            case SimplificationMode::RandomLegal:
+                return "RandomLegal";
+            case SimplificationMode::ShortestLegal:
+                return "ShortestLegal";
+            default:
+                return "Unknown";
+            }
+        }
+
+        int activeTriangleCount() const {
+            return simplifier.currentMesh().activeFaceCount();
+        }
+
+        int activeEdgeCount() const {
+            return simplifier.currentMesh().activeEdgeCount();
         }
 
         glm::vec3 getLocalX() const {
@@ -58,6 +143,29 @@ class Model {
         // model data
         std::vector<Mesh> meshes;
         std::string directory;
+        TopologyMesh originalTopology;
+        SimplificationController simplifier;
+        int pendingCollapses = 0;
+
+        struct PositionKey {
+            std::uint32_t x = 0;
+            std::uint32_t y = 0;
+            std::uint32_t z = 0;
+
+            bool operator==(const PositionKey& other) const {
+                return x == other.x && y == other.y && z == other.z;
+            }
+        };
+
+        struct PositionKeyHasher {
+            std::size_t operator()(const PositionKey& key) const {
+                std::size_t seed = 0;
+                seed ^= std::hash<std::uint32_t>{}(key.x) + 0x9e3779b9u + (seed << 6) + (seed >> 2);
+                seed ^= std::hash<std::uint32_t>{}(key.y) + 0x9e3779b9u + (seed << 6) + (seed >> 2);
+                seed ^= std::hash<std::uint32_t>{}(key.z) + 0x9e3779b9u + (seed << 6) + (seed >> 2);
+                return seed;
+            }
+        };
 
         // local axis
         glm::vec3 localX;
@@ -65,6 +173,11 @@ class Model {
         glm::vec3 localZ;
 
         void loadModel(std::string path) {
+            meshes.clear();
+            originalTopology.clear();
+            pendingCollapses = 0;
+            std::unordered_map<PositionKey, int, PositionKeyHasher> topologyVertexMap;
+
             // Initialize loader
             objl::Loader loader;
 
@@ -79,18 +192,77 @@ class Model {
                     // copy the current mesh
                     objl::Mesh curMesh = loader.LoadedMeshes[i];
 
-                    // process and store the mesh
-                    meshes.push_back(processMesh(curMesh));
+                    for (int j = 0; j + 2 < curMesh.Indices.size(); j += 3) {
+                        int topoFace[3];
+
+                        for (int k = 0; k < 3; ++k) {
+                            const objl::Vertex& sourceVertex = curMesh.Vertices[curMesh.Indices[j + k]];
+                            const glm::vec3 position(
+                                sourceVertex.Position.X,
+                                sourceVertex.Position.Y,
+                                sourceVertex.Position.Z);
+
+                            const PositionKey key = makePositionKey(position);
+                            const auto existing = topologyVertexMap.find(key);
+                            if (existing == topologyVertexMap.end()) {
+                                const int newVertexId = originalTopology.addVertex(position);
+                                topologyVertexMap.emplace(key, newVertexId);
+                                topoFace[k] = newVertexId;
+                            } else {
+                                topoFace[k] = existing->second;
+                            }
+                        }
+
+                        originalTopology.addFace(
+                            topoFace[0],
+                            topoFace[1],
+                            topoFace[2]);
+                    }
                 }
 
             } else {
                 std::cout << "Failed to load " << path << std::endl;
             }
 
+            originalTopology.buildAdjacency();
+            simplifier.setOriginalMesh(originalTopology);
+            simplifier.setMode(SimplificationMode::RandomLegal);
+            rebuildRenderMeshesFromCurrentTopology();
+
             // Declare local axes
             localX = glm::vec3(1.0f, 0.0f, 0.0f);
             localY = glm::vec3(0.0f, 1.0f, 0.0f);
             localZ = glm::vec3(0.0f, 0.0f, 1.0f);
+        }
+
+        void rebuildRenderMeshesFromCurrentTopology() {
+            meshes.clear();
+
+            const TopologyRenderData renderData = simplifier.currentMesh().toRenderData();
+            if (renderData.vertices.empty() || renderData.indices.empty()) {
+                return;
+            }
+
+            std::vector<Vertex> renderVertices;
+            renderVertices.reserve(renderData.vertices.size());
+
+            for (const TopologyRenderVertex& sourceVertex : renderData.vertices) {
+                Vertex vertex;
+                vertex.Position = sourceVertex.position;
+                vertex.Normal = sourceVertex.normal;
+                vertex.TexCoords = sourceVertex.texCoord;
+                renderVertices.push_back(vertex);
+            }
+
+            meshes.emplace_back(renderVertices, renderData.indices, std::vector<Texture>{});
+        }
+
+        PositionKey makePositionKey(const glm::vec3& position) const {
+            PositionKey key;
+            std::memcpy(&key.x, &position.x, sizeof(float));
+            std::memcpy(&key.y, &position.y, sizeof(float));
+            std::memcpy(&key.z, &position.z, sizeof(float));
+            return key;
         }
 
         Mesh processMesh(objl::Mesh mesh) {

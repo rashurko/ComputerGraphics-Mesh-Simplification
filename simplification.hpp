@@ -1,0 +1,166 @@
+#pragma once
+
+#include <memory>
+#include <optional>
+#include <random>
+
+#include "topology_mesh.hpp"
+
+enum class SimplificationMode {
+    Original,
+    Random,
+    RandomLegal,
+    ShortestLegal
+};
+
+struct CollapseChoice {
+    int keepVid = -1;
+    int removeVid = -1;
+    glm::vec3 newPosition = glm::vec3(0.0f);
+    float cost = 0.0f;
+};
+
+class SimplificationStrategy {
+public:
+    virtual ~SimplificationStrategy() = default;
+    virtual std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) = 0;
+};
+
+class RandomCollapseStrategy : public SimplificationStrategy {
+public:
+    std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
+        std::vector<TopologyEdge> edges = mesh.getActiveEdges();
+        if (edges.empty()) {
+            return std::nullopt;
+        }
+
+        static std::mt19937 rng(std::random_device{}());
+        std::uniform_int_distribution<std::size_t> dist(0, edges.size() - 1);
+        const TopologyEdge& edge = edges[dist(rng)];
+
+        const glm::vec3 midpoint =
+            0.5f * (mesh.getVertices()[edge.v0].position + mesh.getVertices()[edge.v1].position);
+
+        return CollapseChoice{ edge.v0, edge.v1, midpoint, 0.0f };
+    }
+};
+
+class RandomLegalCollapseStrategy : public SimplificationStrategy {
+public:
+    std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
+        std::vector<TopologyEdge> edges = mesh.getActiveEdges();
+        if (edges.empty()) {
+            return std::nullopt;
+        }
+
+        static std::mt19937 rng(std::random_device{}());
+        std::shuffle(edges.begin(), edges.end(), rng);
+
+        for (const TopologyEdge& edge : edges) {
+            if (!mesh.isLegalCollapse(edge.v0, edge.v1)) {
+                continue;
+            }
+
+            const glm::vec3 midpoint =
+                0.5f * (mesh.getVertices()[edge.v0].position + mesh.getVertices()[edge.v1].position);
+
+            return CollapseChoice{ edge.v0, edge.v1, midpoint, 0.0f };
+        }
+
+        return std::nullopt;
+    }
+};
+
+class ShortestLegalCollapseStrategy : public SimplificationStrategy {
+public:
+    std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
+        std::vector<TopologyEdge> edges = mesh.getActiveEdges();
+        std::optional<CollapseChoice> bestChoice;
+
+        for (const TopologyEdge& edge : edges) {
+            if (!mesh.isLegalCollapse(edge.v0, edge.v1)) {
+                continue;
+            }
+
+            const glm::vec3 delta =
+                mesh.getVertices()[edge.v0].position - mesh.getVertices()[edge.v1].position;
+            const float length = glm::length(delta);
+            const glm::vec3 midpoint =
+                0.5f * (mesh.getVertices()[edge.v0].position + mesh.getVertices()[edge.v1].position);
+
+            if (!bestChoice.has_value() || length < bestChoice->cost) {
+                bestChoice = CollapseChoice{ edge.v0, edge.v1, midpoint, length };
+            }
+        }
+
+        return bestChoice;
+    }
+};
+
+class SimplificationController {
+public:
+    void setOriginalMesh(const TopologyMesh& mesh) {
+        originalMesh = mesh;
+        workingMesh = mesh;
+    }
+
+    void setMode(SimplificationMode newMode) {
+        currentMode = newMode;
+        reset();
+    }
+
+    void reset() {
+        workingMesh = originalMesh;
+    }
+
+    bool applyOneStep() {
+        if (currentMode == SimplificationMode::Original) {
+            return false;
+        }
+
+        std::unique_ptr<SimplificationStrategy> strategy = makeStrategy();
+        if (!strategy) {
+            return false;
+        }
+
+        std::optional<CollapseChoice> choice = strategy->chooseCollapse(workingMesh);
+        if (!choice.has_value()) {
+            return false;
+        }
+
+        return workingMesh.collapseEdge(choice->keepVid, choice->removeVid, choice->newPosition);
+    }
+
+    bool simplifyToFaceCount(int targetFaces) {
+        bool changed = false;
+        while (workingMesh.activeFaceCount() > targetFaces) {
+            if (!applyOneStep()) {
+                break;
+            }
+            changed = true;
+        }
+        return changed;
+    }
+
+    const TopologyMesh& currentMesh() const { return workingMesh; }
+    SimplificationMode mode() const { return currentMode; }
+
+private:
+    TopologyMesh originalMesh;
+    TopologyMesh workingMesh;
+    SimplificationMode currentMode = SimplificationMode::Original;
+
+    std::unique_ptr<SimplificationStrategy> makeStrategy() const {
+        switch (currentMode) {
+        case SimplificationMode::Random:
+            return std::make_unique<RandomCollapseStrategy>();
+        case SimplificationMode::RandomLegal:
+            return std::make_unique<RandomLegalCollapseStrategy>();
+        case SimplificationMode::ShortestLegal:
+            return std::make_unique<ShortestLegalCollapseStrategy>();
+        case SimplificationMode::Original:
+        default:
+            return nullptr;
+        }
+    }
+};

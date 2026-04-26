@@ -1,4 +1,4 @@
-#include <glad/glad.h>
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -26,11 +26,63 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 }
 
 // process the inputs
-void processInput(GLFWwindow *window, Camera &cam, float deltaTime) {
+void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime) {
     // esc key to exit
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
+
+    static bool mode1PressedLastFrame = false;
+    static bool mode2PressedLastFrame = false;
+    static bool mode3PressedLastFrame = false;
+    static bool mode4PressedLastFrame = false;
+    static bool resetPressedLastFrame = false;
+
+    const bool mode1PressedNow = glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS;
+    const bool mode2PressedNow = glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS;
+    const bool mode3PressedNow = glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS;
+    const bool mode4PressedNow = glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS;
+    const bool resetPressedNow = glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS;
+
+    if (mode1PressedNow && !mode1PressedLastFrame) {
+        model.setSimplificationMode(SimplificationMode::Original);
+        std::cout << "Mode: " << model.currentModeName() << std::endl;
+    }
+    if (mode2PressedNow && !mode2PressedLastFrame) {
+        model.setSimplificationMode(SimplificationMode::Random);
+        std::cout << "Mode: " << model.currentModeName() << std::endl;
+    }
+    if (mode3PressedNow && !mode3PressedLastFrame) {
+        model.setSimplificationMode(SimplificationMode::RandomLegal);
+        std::cout << "Mode: " << model.currentModeName() << std::endl;
+    }
+    if (mode4PressedNow && !mode4PressedLastFrame) {
+        model.setSimplificationMode(SimplificationMode::ShortestLegal);
+        std::cout << "Mode: " << model.currentModeName() << std::endl;
+    }
+    if (resetPressedNow && !resetPressedLastFrame) {
+        model.resetSimplification();
+        std::cout << "Reset current mesh in mode: " << model.currentModeName() << std::endl;
+    }
+
+    mode1PressedLastFrame = mode1PressedNow;
+    mode2PressedLastFrame = mode2PressedNow;
+    mode3PressedLastFrame = mode3PressedNow;
+    mode4PressedLastFrame = mode4PressedNow;
+    resetPressedLastFrame = resetPressedNow;
+
+    static bool decimatePressedLastFrame = false;
+    const bool decimatePressedNow = glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS;
+    if (decimatePressedNow && !decimatePressedLastFrame) {
+        model.queueCollapseBatch(100);
+        std::cout << "Queued 100 collapses. Pending: "
+                  << model.pendingCollapseCount()
+                  << " | mode: " << model.currentModeName()
+                  << " | faces: " << model.activeTriangleCount()
+                  << " | edges: " << model.activeEdgeCount()
+                  << std::endl;
+    }
+    decimatePressedLastFrame = decimatePressedNow;
 
     // camera movement
     const float cameraSpeed = 2.5f * deltaTime;
@@ -119,7 +171,7 @@ int main () {
 
     // glad: load all OpenGl function pointers
     // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (!gladLoadGL((GLADloadfunc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
@@ -154,7 +206,8 @@ int main () {
 
         // Process the inputs
         // ------------------
-        processInput(window, cam, deltaTime);
+        processInput(window, cam, ourModel, deltaTime);
+        ourModel.processPendingCollapses(5);
 
         // Render
         // ------
@@ -195,16 +248,38 @@ int main () {
         }
 
         if (ImGui::BeginPopup("context_menu")) {
-            if (ImGui::MenuItem("Load")) {
-                // trigger the pfd file dialog
-                auto dialog = pfd::open_file("Select a 3D Model", "./models", {"OBJ Files", "*.obj"});
-                // if the user selected a file, load the model
-                if (!dialog.result().empty()) {
-                    // TODO: delete previous model from the memory
-                    std::string newFilePath = dialog.result()[0];  
-                    ourModel = Model(newFilePath);
-                    ourModelPtr = &ourModel;
+            if (ImGui::BeginMenu("Load")) {
+                const char* bundledModels[] = {
+                    "models/bunny_200.obj",
+                    "models/bunny_1k.obj",
+                    "models/bunny_40k.obj",
+                    "models/complex.obj",
+                    "models/creased_cube.obj",
+                    "models/cube.obj",
+                    "models/l.obj",
+                    "models/open_box.obj",
+                    "models/torus.obj"
+                };
+
+                for (const char* modelPath : bundledModels) {
+                    if (ImGui::MenuItem(modelPath)) {
+                        ourModel.loadFromPath(modelPath);
+                        ourModelPtr = &ourModel;
+                    }
                 }
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Open file dialog")) {
+                    auto dialog = pfd::open_file("Select a 3D Model", "./models", {"OBJ Files", "*.obj"});
+                    if (!dialog.result().empty()) {
+                        std::string newFilePath = dialog.result()[0];
+                        ourModel.loadFromPath(newFilePath);
+                        ourModelPtr = &ourModel;
+                    }
+                }
+
+                ImGui::EndMenu();
             }
             ImGui::EndPopup();
         }
