@@ -1,4 +1,4 @@
-# Install script for directory: /home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification
+# Install script for directory: /home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

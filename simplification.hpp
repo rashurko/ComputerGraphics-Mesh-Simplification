@@ -1,5 +1,6 @@
 #pragma once
 
+#include <queue>
 #include <memory>
 #include <optional>
 #include <random>
@@ -74,25 +75,30 @@ public:
 class ShortestLegalCollapseStrategy : public SimplificationStrategy {
 public:
     std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
-        std::vector<TopologyEdge> edges = mesh.getActiveEdges();
         std::optional<CollapseChoice> bestChoice;
 
-        for (const TopologyEdge& edge : edges) {
-            if (!mesh.isLegalCollapse(edge.v0, edge.v1)) {
+        if (mesh.getEdgeToLength().empty()) {
+            mesh.precomputeEdgeLengths();
+        }
+
+        while (!mesh.getEdgeToLength().empty()) {
+            auto edgeToLength = mesh.getEdgeToLength();
+            const std::pair<int, int> shortestEdge = edgeToLength.top().second;
+            auto edgeToNeighbors = mesh.getEdgeToNeighbors();
+            std::pair<std::vector<int>, std::vector<int>> neighbors = edgeToNeighbors[shortestEdge];
+            const float length = sqrt(1 / edgeToLength.top().first);
+            mesh.popEdgeLengths();
+
+            if (!mesh.isLegalCollapse(shortestEdge.first, shortestEdge.second)) {
                 continue;
             }
 
-            const glm::vec3 delta =
-                mesh.getVertices()[edge.v0].position - mesh.getVertices()[edge.v1].position;
-            const float length = glm::length(delta);
-            const glm::vec3 midpoint =
-                0.5f * (mesh.getVertices()[edge.v0].position + mesh.getVertices()[edge.v1].position);
+            const glm::vec3 midpoint = 0.5f * (mesh.getVertices()[shortestEdge.first].position + mesh.getVertices()[shortestEdge.second].position);
 
-            if (!bestChoice.has_value() || length < bestChoice->cost) {
-                bestChoice = CollapseChoice{ edge.v0, edge.v1, midpoint, length };
-            }
+            bestChoice = CollapseChoice{shortestEdge.first, shortestEdge.second, midpoint, length};
+            mesh.updateEdgeLengths(shortestEdge);
+            break;
         }
-
         return bestChoice;
     }
 };
@@ -142,7 +148,7 @@ public:
         return changed;
     }
 
-    const TopologyMesh& currentMesh() const { return workingMesh; }
+    TopologyMesh& currentMesh() { return workingMesh; }
     SimplificationMode mode() const { return currentMode; }
 
 private:

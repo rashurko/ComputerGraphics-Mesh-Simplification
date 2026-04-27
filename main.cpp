@@ -74,8 +74,9 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     static bool decimatePressedLastFrame = false;
     const bool decimatePressedNow = glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS;
     if (decimatePressedNow && !decimatePressedLastFrame) {
-        model.queueCollapseBatch(100);
-        std::cout << "Queued 100 collapses. Pending: "
+        // queue 10% collapse
+        model.queueCollapseBatch(static_cast<int>(model.activeTriangleCount() * 0.1f));
+        std::cout << "Queued 10% collapses. Pending: "
                   << model.pendingCollapseCount()
                   << " | mode: " << model.currentModeName()
                   << " | faces: " << model.activeTriangleCount()
@@ -283,6 +284,14 @@ int main () {
             }
             ImGui::EndPopup();
         }
+
+        // ImGui window with progress bar
+        ImGui::Begin("Simplification Progress");
+        ImGui::SetWindowSize(ImVec2(200, 85));
+        ImGui::Text("Pending collapses: %d", ourModel.pendingCollapseCount());
+        ImGui::Text("Active faces: %d", ourModel.activeTriangleCount());
+        ImGui::Text("Active edges: %d", ourModel.activeEdgeCount());
+        ImGui::End();
 
 
         ImGui::Render();

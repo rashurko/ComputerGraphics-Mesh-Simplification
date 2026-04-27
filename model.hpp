@@ -104,11 +104,11 @@ class Model {
             }
         }
 
-        int activeTriangleCount() const {
+        int activeTriangleCount() {
             return simplifier.currentMesh().activeFaceCount();
         }
 
-        int activeEdgeCount() const {
+        int activeEdgeCount() {
             return simplifier.currentMesh().activeEdgeCount();
         }
 
