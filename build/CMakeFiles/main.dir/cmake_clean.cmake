@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/main"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/main.pdb"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/main"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/main.pdb"
+  "CMakeFiles/main.dir/glad/src/gl.c.o"
+  "CMakeFiles/main.dir/glad/src/gl.c.o.d"
   "CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o"
   "CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o.d"
   "CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o"
@@ -20,6 +22,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang C CXX)
   include(CMakeFiles/main.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

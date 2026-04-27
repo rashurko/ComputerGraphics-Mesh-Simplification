@@ -8,14 +8,15 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.cpp" "CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.cpp" "CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/imgui.cpp" "CMakeFiles/main.dir/imgui/imgui.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/imgui_draw.cpp" "CMakeFiles/main.dir/imgui/imgui_draw.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui_draw.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/imgui_tables.cpp" "CMakeFiles/main.dir/imgui/imgui_tables.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui_tables.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/imgui_widgets.cpp" "CMakeFiles/main.dir/imgui/imgui_widgets.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui_widgets.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/main.cpp" "CMakeFiles/main.dir/main.cpp.o" "gcc" "CMakeFiles/main.dir/main.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/stb_image.cpp" "CMakeFiles/main.dir/stb_image.cpp.o" "gcc" "CMakeFiles/main.dir/stb_image.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/src/gl.c" "CMakeFiles/main.dir/glad/src/gl.c.o" "gcc" "CMakeFiles/main.dir/glad/src/gl.c.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.cpp" "CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.cpp" "CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui.cpp" "CMakeFiles/main.dir/imgui/imgui.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui_draw.cpp" "CMakeFiles/main.dir/imgui/imgui_draw.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui_draw.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui_tables.cpp" "CMakeFiles/main.dir/imgui/imgui_tables.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui_tables.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui_widgets.cpp" "CMakeFiles/main.dir/imgui/imgui_widgets.cpp.o" "gcc" "CMakeFiles/main.dir/imgui/imgui_widgets.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/main.cpp" "CMakeFiles/main.dir/main.cpp.o" "gcc" "CMakeFiles/main.dir/main.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/stb_image.cpp" "CMakeFiles/main.dir/stb_image.cpp.o" "gcc" "CMakeFiles/main.dir/stb_image.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

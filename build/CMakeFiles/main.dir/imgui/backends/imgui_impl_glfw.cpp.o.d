@@ -1,8 +1,8 @@
 CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o: \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.cpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.cpp \
  /usr/include/stdc-predef.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h /usr/include/string.h \
@@ -17,7 +17,7 @@ CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/assert.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.h \
  /usr/local/include/GLFW/glfw3.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
@@ -27,7 +27,8 @@ CMakeFiles/main.dir/imgui/backends/imgui_impl_glfw.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h /usr/include/GL/gl.h \
- /usr/include/GL/glext.h /usr/local/include/KHR/khrplatform.h \
+ /usr/include/GL/glext.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include/KHR/khrplatform.h \
  /usr/local/include/GLFW/glfw3native.h /usr/include/X11/Xlib.h \
  /usr/include/x86_64-linux-gnu/sys/types.h \
  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \

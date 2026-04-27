@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification"
+CMAKE_SOURCE_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build"
+CMAKE_BINARY_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -128,6 +128,30 @@ main: cmake_check_build_system
 main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
+
+glad/src/gl.o: glad/src/gl.c.o
+.PHONY : glad/src/gl.o
+
+# target to build an object file
+glad/src/gl.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/glad/src/gl.c.o
+.PHONY : glad/src/gl.c.o
+
+glad/src/gl.i: glad/src/gl.c.i
+.PHONY : glad/src/gl.i
+
+# target to preprocess a source file
+glad/src/gl.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/glad/src/gl.c.i
+.PHONY : glad/src/gl.c.i
+
+glad/src/gl.s: glad/src/gl.c.s
+.PHONY : glad/src/gl.s
+
+# target to generate assembly for a file
+glad/src/gl.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/glad/src/gl.c.s
+.PHONY : glad/src/gl.c.s
 
 imgui/backends/imgui_impl_glfw.o: imgui/backends/imgui_impl_glfw.cpp.o
 .PHONY : imgui/backends/imgui_impl_glfw.o
@@ -330,6 +354,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... glad/src/gl.o"
+	@echo "... glad/src/gl.i"
+	@echo "... glad/src/gl.s"
 	@echo "... imgui/backends/imgui_impl_glfw.o"
 	@echo "... imgui/backends/imgui_impl_glfw.i"
 	@echo "... imgui/backends/imgui_impl_glfw.s"
