@@ -99,6 +99,8 @@ class Model {
                 return "RandomLegal";
             case SimplificationMode::ShortestLegal:
                 return "ShortestLegal";
+            case SimplificationMode::LowestLegalQError:
+                return "LowestLegalQError";
             default:
                 return "Unknown";
             }

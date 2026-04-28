@@ -11,7 +11,8 @@ enum class SimplificationMode {
     Original,
     Random,
     RandomLegal,
-    ShortestLegal
+    ShortestLegal,
+    LowestLegalQError
 };
 
 struct CollapseChoice {
@@ -103,6 +104,45 @@ public:
     }
 };
 
+class LowestQuadraticErrorStrategy : public SimplificationStrategy {
+    std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
+        std::optional<CollapseChoice> bestChoice;
+
+        if (mesh.getEdgeToQuadraticError().empty()) {
+            mesh.computeInitialVertexQuadrics();
+            mesh.precomputeQuadraticErrors();
+        }
+
+        while(!mesh.getEdgeToQuadraticError().empty()) {
+            const std::pair<int, int> shortestEdge = mesh.getEdgeToQuadraticError().top().second;
+            auto edgeToNeighbors = mesh.getEdgeToNeighbors();
+            std::pair<std::vector<int>, std::vector<int>> neighbors = edgeToNeighbors[shortestEdge];
+            const float error = mesh.getEdgeToQuadraticError().top().first;
+            mesh.popQuadraticError();
+
+    
+            const auto& currentErrors = mesh.getEdgeToCurrentError();
+            auto it = currentErrors.find(shortestEdge);   
+            // If the edge was completely erased, or the error doesn't match
+            if (it == currentErrors.end() || error != it->second) {
+                continue;
+            }
+
+            if (!mesh.isLegalCollapse(shortestEdge.first, shortestEdge.second)) {
+                continue;
+            }
+
+            const glm::vec3 newPoint = mesh.getEdgeToPos().at(std::make_pair(std::min(shortestEdge.first, shortestEdge.second), std::max(shortestEdge.first, shortestEdge.second)));
+
+            bestChoice = CollapseChoice{shortestEdge.first, shortestEdge.second, newPoint, error};
+            mesh.updateQuadraticErrors(shortestEdge);
+            break;
+        }
+
+        return bestChoice;
+    }
+};
+
 class SimplificationController {
 public:
     void setOriginalMesh(const TopologyMesh& mesh) {
@@ -164,6 +204,8 @@ private:
             return std::make_unique<RandomLegalCollapseStrategy>();
         case SimplificationMode::ShortestLegal:
             return std::make_unique<ShortestLegalCollapseStrategy>();
+        case SimplificationMode::LowestLegalQError:
+            return std::make_unique<LowestQuadraticErrorStrategy>();
         case SimplificationMode::Original:
         default:
             return nullptr;

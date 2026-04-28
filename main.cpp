@@ -36,12 +36,14 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     static bool mode2PressedLastFrame = false;
     static bool mode3PressedLastFrame = false;
     static bool mode4PressedLastFrame = false;
+    static bool mode5PressedLastFrame = false;
     static bool resetPressedLastFrame = false;
 
     const bool mode1PressedNow = glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS;
     const bool mode2PressedNow = glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS;
     const bool mode3PressedNow = glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS;
     const bool mode4PressedNow = glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS;
+    const bool mode5PressedNow = glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS;
     const bool resetPressedNow = glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS;
 
     if (mode1PressedNow && !mode1PressedLastFrame) {
@@ -60,6 +62,10 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
         model.setSimplificationMode(SimplificationMode::ShortestLegal);
         std::cout << "Mode: " << model.currentModeName() << std::endl;
     }
+    if (mode5PressedNow && !mode5PressedLastFrame) {
+        model.setSimplificationMode(SimplificationMode::LowestLegalQError);
+        std::cout << "Mode: " << model.currentModeName() << std::endl;
+    }
     if (resetPressedNow && !resetPressedLastFrame) {
         model.resetSimplification();
         std::cout << "Reset current mesh in mode: " << model.currentModeName() << std::endl;
@@ -69,6 +75,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     mode2PressedLastFrame = mode2PressedNow;
     mode3PressedLastFrame = mode3PressedNow;
     mode4PressedLastFrame = mode4PressedNow;
+    mode5PressedLastFrame = mode5PressedNow;
     resetPressedLastFrame = resetPressedNow;
 
     static bool decimatePressedLastFrame = false;
