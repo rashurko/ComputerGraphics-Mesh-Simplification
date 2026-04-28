@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <array>
+#include <tuple>
 #include <queue>
 #include <cmath>
 #include <cstdint>
@@ -14,6 +15,7 @@
 struct TopologyVertex {
     int id = -1;
     glm::vec3 position = glm::vec3(0.0f);
+    glm::mat4 Q{0.0f}; // For quadratic error 
     bool active = true;
 };
 
@@ -61,13 +63,15 @@ public:
         faceNormals.clear();
         edges.clear();
         vertexToFaces.clear();
+        edgeToLength =  std::priority_queue<std::pair<float, std::pair<int, int>>>();
+        edgeToNeighbors.clear();
 
         firstPass = true;
     }
 
     int addVertex(const glm::vec3& position) {
         const int id = static_cast<int>(vertices.size());
-        vertices.push_back({ id, position, true });
+        vertices.push_back({ id, position, glm::mat4(0.0f), true });
         vertexToFaces.emplace_back();
         return id;
     }
@@ -352,6 +356,7 @@ public:
         }
 
         vertices[keepVid].position = newPos;
+        vertices[keepVid].Q += vertices[removeVid].Q;
 
         for (const auto& faceid : vertexToFaces[removeVid]) {
             TopologyFace& face = faces[faceid];
@@ -527,6 +532,8 @@ public:
         affectedFaces.clear();
     }
 
+    // Shortest edge removal
+    // ---------------------
     void precomputeEdgeLengths() {
         for (const TopologyEdge& edge : getActiveEdges()) {
             int v0 = edge.v0;
@@ -559,9 +566,12 @@ public:
 
         for (const int n : neighbors.second) {
             if (n == collapseEdge.first) {
-                edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
                 continue;
             }
+
+            // Delete all pairs with the second vertex of the edge
+            edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
 
             const glm::vec3 delta = getVertices()[collapseEdge.second].position - getVertices()[n].position;
             const float length = glm::dot(delta, delta);
@@ -573,10 +583,204 @@ public:
         edgeToLength.pop();
     }
 
+    const std::priority_queue<std::pair<float, std::pair<int, int>>>& getEdgeToLength() const { return edgeToLength; }
+    const std::map<std::pair<int, int>, std::pair<std::vector<int>, std::vector<int>>>& getEdgeToNeighbors() const { return edgeToNeighbors; }
+
+    // Lowest quadratic error removal
+    // -----------------------------
+    void precomputeQuadraticErrors() {
+        for (const TopologyEdge& edge : getActiveEdges()) {
+            int v0 = edge.v0;
+            int v1 = edge.v1;
+
+            std::tuple<glm::vec3, float> solution = solveQuadratic(edge);
+            glm::vec3 vPos(std::get<0>(solution));
+            float error = std::get<1>(solution);
+            // Check whether the solution is valid
+            if (error < -0.1f) {
+                continue;
+            }
+
+            std::vector<int> v0Neighbors = getVertexNeighbors(v0);
+            std::vector<int> v1Neighbors = getVertexNeighbors(v1);
+            
+            edgeToPos.emplace(std::make_pair(std::min(v0, v1), std::max(v0, v1)), vPos);
+            edgeToQuadraticError.emplace(error, std::make_pair(std::min(v0, v1), std::max(v0, v1)));
+            edgeToNeighbors.emplace(std::make_pair(std::min(v0, v1), std::max(v0, v1)), std::make_pair(v0Neighbors, v1Neighbors));
+            edgeToCurrentError[std::make_pair(std::min(v0, v1), std::max(v0, v1))] = error;
+        }
+    }
+
+    void computeInitialVertexQuadrics() {
+        // Ensure all vertex quadrics are zeroed out
+        for (auto& vertex : vertices) {
+            vertex.Q = glm::mat4(0.0f);
+        }
+
+        for (const TopologyFace& face : faces) {
+            int v0 = face.v[0];
+            int v1 = face.v[1];
+            int v2 = face.v[2];
+
+            glm::vec3 p0 = vertices[v0].position;
+            glm::vec3 p1 = vertices[v1].position;
+            glm::vec3 p2 = vertices[v2].position;
+
+            glm::vec3 e1 = p1 - p0;
+            glm::vec3 e2 = p2 - p0;
+            glm::vec3 n = glm::normalize(glm::cross(e1, e2));
+
+            // Determine a, b, c and d for the plane equation (ax + by + cz + d = 0)
+            float a = n.x;
+            float b = n.y;
+            float c = n.z;
+            float d = -glm::dot(n, p0);
+
+            // Determine the fundamental error quadric Kp 
+            float coeffs[] = {a, b, c, d};
+            glm::mat4 Kp(0.0f);
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    Kp[i][j] = coeffs[i] * coeffs[j];
+                }
+            }
+
+            vertices[v0].Q += Kp;
+            vertices[v1].Q += Kp;
+            vertices[v2].Q += Kp;
+        }
+    }
+
+    void updateQuadraticErrors(const std::pair<int, int> &collapseEdge) {
+        std::pair<std::vector<int>, std::vector<int>> neighbors = edgeToNeighbors[collapseEdge];
+        
+        // Determine the faces of the vertices of the edge
+        std::vector<int> faces0 = vertexToFaces[collapseEdge.first];
+        std::vector<int> faces1 = vertexToFaces[collapseEdge.second];
+
+        for (const int n : neighbors.first) {
+            if (n == collapseEdge.second) {
+                edgeToPos.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                edgeToCurrentError.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                continue;
+            }
+
+            // Determine common faces
+            std::vector<int> nFaces = vertexToFaces[n];
+            std::vector<int> commonFaces;
+            for (int fid : faces0) {
+                if (std::find(nFaces.begin(), nFaces.end(), fid) != nFaces.end()) {
+                    commonFaces.push_back(fid);
+                }
+            }
+
+            TopologyEdge edge = {std::min(collapseEdge.first, n), std::max(collapseEdge.first, n), commonFaces};
+            std::tuple<glm::vec3, float> solution = solveQuadratic(edge);
+            glm::vec3 vPos = std::get<0>(solution);
+            float error = std::get<1>(solution);
+            if (error < 0) {
+                continue;
+            }
+
+            edgeToPos[std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n))] = vPos;
+            edgeToQuadraticError.emplace(error, std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+            edgeToCurrentError[std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n))] = error;
+        }
+
+        for (const int n : neighbors.second) {
+            if (n == collapseEdge.first) {
+                edgeToPos.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                edgeToCurrentError.erase(std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+                continue;
+            }
+
+            // Delete all pairs with the second vertex of the edge
+            edgeToPos.erase(std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
+            edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
+            edgeToCurrentError.erase(std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
+
+            // Determine common faces
+            std::vector<int> nFaces = vertexToFaces[n];
+            std::vector<int> commonFaces;
+            for (int fid : faces0) {
+                if (std::find(nFaces.begin(), nFaces.end(), fid) != nFaces.end()) {
+                    commonFaces.push_back(fid);
+                }
+            }
+
+            TopologyEdge edge = {std::min(collapseEdge.first, n), std::max(collapseEdge.first, n), commonFaces};
+            std::tuple<glm::vec3, float> solution = solveQuadratic(edge);
+            glm::vec3 vPos = std::get<0>(solution);
+            float error = std::get<1>(solution);
+            if (error < 0) {
+                continue;
+            }
+
+            edgeToPos[std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n))] = vPos;
+            edgeToQuadraticError.emplace(error, std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+            edgeToCurrentError[std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n))] = error;
+        }
+    }
+
+    std::tuple<glm::vec3, float> solveQuadratic(const TopologyEdge& edge) const {
+        std::tuple<glm::vec3, float> result(glm::vec3(0.0f), -1.0f);
+        int v0 = edge.v0;
+        int v1 = edge.v1;
+
+        // Check if the vertices are active
+        if (!isVertexActive(v0) || !isVertexActive(v1)) {
+            return result;
+        }
+
+        // The quadric for the new collapsed vertex
+        glm::mat4 Q = vertices[v0].Q + vertices[v1].Q;
+
+        glm::mat4 tildeQ = Q;
+        tildeQ[0][3] = 0.0f;
+        tildeQ[1][3] = 0.0f;
+        tildeQ[2][3] = 0.0f;
+        tildeQ[3][3] = 1.0f;
+
+        // Calculate the optimal position
+        float det = glm::determinant(tildeQ);
+        glm::vec4 vPos4;
+        glm::vec3 vPos;
+        
+        if (std::abs(det) > 1e-6f) {
+            vPos4 = glm::inverse(tildeQ) * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            vPos = glm::vec3(vPos4);
+        } else {
+            // If solution is degenerate choose the midpoint
+            vPos = (vertices[v0].position + vertices[v1].position) * 0.5f;
+            vPos4 = glm::vec4(vPos, 1.0f);
+        }
+
+        float error = glm::dot(vPos4, Q * vPos4);
+        
+        // If error < 0 due to the floating point error
+        error = std::max(0.0f, error); 
+
+        result = std::make_tuple(vPos, error);
+        return result;
+    }
+
+    void popQuadraticError() {
+        edgeToQuadraticError.pop();
+    }
+
+    const std::priority_queue<
+        std::pair<float, std::pair<int, int>>, 
+        std::vector<std::pair<float, std::pair<int, int>>>, 
+        std::greater<std::pair<float, std::pair<int, int>>>
+    > getEdgeToQuadraticError() const { return edgeToQuadraticError; }
+    const std::map<std::pair<int, int>, glm::vec3>& getEdgeToPos() const { return edgeToPos; }
+    const std::map<std::pair<int, int>, float>& getEdgeToCurrentError() const { return edgeToCurrentError; }
+
     const std::vector<TopologyVertex>& getVertices() const { return vertices; }
     const std::vector<TopologyFace>& getFaces() const { return faces; }
-    const std::priority_queue<std::pair<float, std::pair<int, int>>> getEdgeToLength() const { return edgeToLength; }
-    const std::map<std::pair<int, int>, std::pair<std::vector<int>, std::vector<int>>> getEdgeToNeighbors() const { return edgeToNeighbors; }
+    
 
 private:
     std::vector<TopologyVertex> vertices;
@@ -586,9 +790,18 @@ private:
     std::unordered_map<std::int64_t, TopologyEdge> edges;
     std::vector<std::vector<int>> vertexToFaces;
 
-    // For sorting using length
+    // For shortest edge removal
     std::priority_queue<std::pair<float, std::pair<int, int>>> edgeToLength;
     std::map<std::pair<int, int>, std::pair<std::vector<int>, std::vector<int>>> edgeToNeighbors;
+
+    // For lowest quadratic error removal
+    std::priority_queue<
+        std::pair<float, std::pair<int, int>>, 
+        std::vector<std::pair<float, std::pair<int, int>>>, 
+        std::greater<std::pair<float, std::pair<int, int>>>
+    > edgeToQuadraticError;
+    std::map<std::pair<int, int>, glm::vec3> edgeToPos;
+    std::map<std::pair<int, int>, float> edgeToCurrentError;
 
     // Affected faces
     bool firstPass = true;
