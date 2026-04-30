@@ -31,14 +31,15 @@ public:
 class RandomCollapseStrategy : public SimplificationStrategy {
 public:
     std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
-        std::vector<TopologyEdge> edges = mesh.getActiveEdges();
+        const auto& edges = mesh.getActiveEdges();
         if (edges.empty()) {
             return std::nullopt;
         }
 
         static std::mt19937 rng(std::random_device{}());
         std::uniform_int_distribution<std::size_t> dist(0, edges.size() - 1);
-        const TopologyEdge& edge = edges[dist(rng)];
+        const int64_t key = std::next(std::begin(edges), dist(rng))->first;
+        const TopologyEdge& edge = edges.at(key);
 
         const glm::vec3 midpoint =
             0.5f * (mesh.getVertices()[edge.v0].position + mesh.getVertices()[edge.v1].position);
@@ -50,15 +51,17 @@ public:
 class RandomLegalCollapseStrategy : public SimplificationStrategy {
 public:
     std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
-        std::vector<TopologyEdge> edges = mesh.getActiveEdges();
+        const auto& edges = mesh.getActiveEdges();
         if (edges.empty()) {
             return std::nullopt;
         }
 
         static std::mt19937 rng(std::random_device{}());
-        std::shuffle(edges.begin(), edges.end(), rng);
+        std::uniform_int_distribution<std::size_t> dist(0, edges.size() - 1);
 
-        for (const TopologyEdge& edge : edges) {
+        for (int i = 0; i < edges.size(); i++) {
+            const int64_t key = std::next(std::begin(edges), dist(rng))->first;
+            const TopologyEdge& edge = edges.at(key);
             if (!mesh.isLegalCollapse(edge.v0, edge.v1)) {
                 continue;
             }
@@ -83,9 +86,9 @@ public:
         }
 
         while (!mesh.getEdgeToLength().empty()) {
-            auto edgeToLength = mesh.getEdgeToLength();
+            auto &edgeToLength = mesh.getEdgeToLength();
             const std::pair<int, int> shortestEdge = edgeToLength.top().second;
-            auto edgeToNeighbors = mesh.getEdgeToNeighbors();
+            auto &edgeToNeighbors = mesh.getEdgeToNeighbors();
             std::pair<std::vector<int>, std::vector<int>> neighbors = edgeToNeighbors[shortestEdge];
             const float length = sqrt(1 / edgeToLength.top().first);
             mesh.popEdgeLengths();
@@ -109,22 +112,30 @@ public:
     std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
         std::optional<CollapseChoice> bestChoice;
 
-        if (mesh.getEdgeToQuadraticError().empty()) {
+        const std::priority_queue<
+        std::pair<float, std::pair<int, int>>, 
+        std::vector<std::pair<float, std::pair<int, int>>>, 
+        std::greater<std::pair<float, std::pair<int, int>>>
+        >& edgeToQuadraticError = mesh.getEdgeToQuadraticError();
+        const auto& edgeToCurrentError = mesh.getEdgeToCurrentError();
+        const auto& edgeToPos = mesh.getEdgeToPos();
+
+
+        if (edgeToQuadraticError.empty()) {
             mesh.computeInitialVertexQuadrics();
             mesh.precomputeQuadraticErrors();
         }
 
-        while(!mesh.getEdgeToQuadraticError().empty()) {
-            const std::pair<int, int> shortestEdge = mesh.getEdgeToQuadraticError().top().second;
-            auto edgeToNeighbors = mesh.getEdgeToNeighbors();
+        while(!edgeToQuadraticError.empty()) {
+            const std::pair<int, int> shortestEdge = edgeToQuadraticError.top().second;
+            auto &edgeToNeighbors = mesh.getEdgeToNeighbors();
             std::pair<std::vector<int>, std::vector<int>> neighbors = edgeToNeighbors[shortestEdge];
-            const float error = mesh.getEdgeToQuadraticError().top().first;
+            const float error = edgeToQuadraticError.top().first;
             mesh.popQuadraticError();
 
-            const auto& currentErrors = mesh.getEdgeToCurrentError();
-            auto it = currentErrors.find(shortestEdge);   
+            auto it = edgeToCurrentError.find(shortestEdge);
             // If the edge was completely erased, or the error doesn't match
-            if (it == currentErrors.end() || error != it->second) {
+            if (it == edgeToCurrentError.end() || error != it->second) {
                 continue;
             }
 
@@ -132,7 +143,7 @@ public:
                 continue;
             }
 
-            const glm::vec3 newPoint = mesh.getEdgeToPos().at(std::make_pair(std::min(shortestEdge.first, shortestEdge.second), std::max(shortestEdge.first, shortestEdge.second)));
+            const glm::vec3 newPoint = edgeToPos.at(std::make_pair(std::min(shortestEdge.first, shortestEdge.second), std::max(shortestEdge.first, shortestEdge.second)));
 
             bestChoice = CollapseChoice{shortestEdge.first, shortestEdge.second, newPoint, error};
             mesh.updateQuadraticErrors(shortestEdge);
