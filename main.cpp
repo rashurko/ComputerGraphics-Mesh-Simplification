@@ -32,6 +32,8 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
         glfwSetWindowShouldClose(window, true);
     }
 
+    ImGuiIO& io = ImGui::GetIO();
+
     static bool mode1PressedLastFrame = false;
     static bool mode2PressedLastFrame = false;
     static bool mode3PressedLastFrame = false;
@@ -107,7 +109,10 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
 
     // camera movement
     const float cameraSpeed = 2.5f * deltaTime;
-    cam.pos_update(window, deltaTime);
+
+    if (!io.WantCaptureKeyboard) {
+        cam.pos_update(window, deltaTime);
+    }
 }
 
 // process the scroll
@@ -125,6 +130,10 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 // window settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
+// ImGui interface settings
+bool ImGuiInit = true;
+float simplifyFraction = 0.1f;
 
 // camera settings
 glm::vec3 camPos = glm::vec3(0.0f, 0.2f, 1.0f);
@@ -313,16 +322,78 @@ int main () {
         }
 
         // ImGui window with progress bar
-        ImGui::Begin("Simplification Progress");
-        ImGui::SetWindowSize(ImVec2(200, 85));
+        ImGui::Begin("Menu");
+        // Simplification progress
+        if (ImGuiInit) {
+            ImGui::SetWindowSize(ImVec2(300, 250));
+            ImGui::SetWindowPos(ImVec2(35, 40));
+            ImGuiInit = false;
+        }
         ImGui::Text("Pending collapses: %d", ourModel.pendingCollapseCount());
         ImGui::Text("Active faces: %d", ourModel.activeTriangleCount());
         ImGui::Text("Active edges: %d", ourModel.activeEdgeCount());
+
+        ImGui::Separator();
+
+        // Simplification strategy choice
+        const char* modeNames[] = {"Random", "Shortest Edge", "Quadratic Error"};
+        static int selectIdx = 0; // set 'Random" as default
+        if (ImGui::Combo("Mode", &selectIdx, modeNames, IM_ARRAYSIZE(modeNames))) {
+            if (selectIdx == 0) {
+                ourModel.setSimplificationMode(SimplificationMode::RandomLegal);
+            }
+            if (selectIdx == 1) {
+                ourModel.setSimplificationMode(SimplificationMode::ShortestLegal);
+            }
+            if (selectIdx == 2) {
+                ourModel.setSimplificationMode(SimplificationMode::LowestLegalQError);
+            }
+        }
+        static bool useLegal = false;
+        if (ImGui::Checkbox("Use legal edges", &useLegal)) {
+            ourModel.resetSimplification();
+            ourModel.setUseLegal(useLegal);
+        }
+
+        if (selectIdx == 1 || selectIdx == 2) {
+            static bool useGaussianCurv = false;
+            if (ImGui::Checkbox("Use Gaussian curvature", &useGaussianCurv)) {
+                ourModel.resetSimplification();
+                ourModel.setGaussianCurvature(useGaussianCurv);
+            }
+            static float alpha = 1.0f;
+            if (useGaussianCurv) {
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.2f, 0.8f, 1.0f, 1.0f)); // Blue highlight
+                if (ImGui::SliderFloat("Alpha", &alpha, 0.1f, 20.0f)){
+                    ourModel.resetSimplification();
+                    ourModel.setAlpha(alpha);
+                }
+                ImGui::PopStyleColor();
+            }
+        }
+
+        ImGui::Separator();
+
+        // A slider to choose the percentage of the mesh to simplify
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.2f, 0.8f, 1.0f, 1.0f));
+        ImGui::SliderFloat("Max Simplify", &simplifyFraction, 0.0f, 1.0f);
+        ImGui::PopStyleColor();
+
+        // A buttong to trigger simplification
+        if (ImGui::Button("Simplify Mesh")) {
+            ourModel.queueCollapseBatch(static_cast<int>(ourModel.activeTriangleCount() * simplifyFraction));
+        }
+
+        // A button to rest the mesh
+        ImGui::SameLine();
+        if (ImGui::Button("Reset")) {
+            ourModel.resetSimplification();
+        }
+
         ImGui::End();
 
-
-        ImGui::Render();
         // ImGui: render ImGui
+        ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -344,15 +415,34 @@ int main () {
 };
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    ImGuiIO& io = ImGui::GetIO();
+
+    if (io.WantCaptureMouse) {
+        return;
+    }
+
     cam.scroll_callback(window, xoffset, yoffset, cam.dist_origin());
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {
+    ImGuiIO& io = ImGui::GetIO();
+
+    // If the mouse if over ImGui window
+    if (io.WantCaptureMouse) {
+        return;
+    }
+
     cam.mouse_callback(window, xposIn, yposIn, model, *ourModelPtr);
 };
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {   
+    ImGuiIO& io = ImGui::GetIO();
+
+    if (io.WantCaptureMouse) {
+        return;
+    }
+
     // handle left mouse button
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         cam.leftMousePressed = true;

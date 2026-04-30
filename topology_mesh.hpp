@@ -57,6 +57,8 @@ class TopologyMesh {
 public:
     TopologyMesh() = default;
 
+    bool useLegal = false;
+
     void clear() {
         vertices.clear();
         vertexNormals.clear();
@@ -352,6 +354,13 @@ public:
         vertices[removeVid].active = false;
         vertexToFaces[removeVid].clear();
 
+        // Update Gaussian Curvatures
+        std::vector<int> affectedVertices = getVertexNeighbors(keepVid);
+        affectedVertices.push_back(keepVid);
+        for (int vid : affectedVertices) {
+            computeK(vid);
+        }
+
         return true;
     }
 
@@ -359,7 +368,6 @@ public:
         TopologyRenderData renderData;
         if (vertexNormals.size() != vertices.size()) {
             recomputeVertexNormals();
-            std::cout << "first pass" << std::endl;
         }
 
         for (const TopologyFace& face : faces) {
@@ -444,7 +452,7 @@ public:
 
             if (gaussianCurvatureEnabled) {
                 float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
-                length *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+                length *= (1 - exp(-a*Kedge)); // costFunc -> costFunc(1 - e^{-aK})
             }
 
             edgeToLength.emplace(1/length, std::make_pair(std::min(v0, v1), std::max(v0, v1)));
@@ -467,7 +475,7 @@ public:
             float length = glm::dot(delta, delta);
             if (gaussianCurvatureEnabled) {
                 float Kedge = std::abs(v0.K) + std::abs(v1.K);
-                length *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+                length *= (1 - exp(-a*Kedge)); // costFunc -> costFunc(1 - e^{-aK})
             }
             edgeToLength.emplace(1/length, std::make_pair(std::min(v0.id, v1.id), std::max(v0.id, v1.id)));
         }
@@ -488,7 +496,7 @@ public:
             float length = glm::dot(delta, delta);
             if (gaussianCurvatureEnabled) {
                 float Kedge = std::abs(v0.K) + std::abs(v1.K);
-                length *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+                length *= (1 - exp(-a*Kedge)); // costFunc -> costFunc(1 - e^{-aK})
             }
             edgeToLength.emplace(1/length, std::make_pair(std::min(v0.id, v1.id), std::max(v0.id, v1.id)));
         }
@@ -514,7 +522,7 @@ public:
 
             if (gaussianCurvatureEnabled) {
                 float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
-                error *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+                error *= (1 - exp(-a*Kedge)); // costFunc -> costFunc(1 - e^{-aK})
             }
 
             // Check whether the solution is valid
@@ -606,7 +614,7 @@ public:
 
             if (gaussianCurvatureEnabled) {
                 float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
-                error *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+                error *= (1 - exp(-a*Kedge)); // costFunc -> costFunc(1 - e^{-aK})
             }
 
             if (error < 0) {
@@ -650,7 +658,7 @@ public:
 
             if (gaussianCurvatureEnabled) {
                 float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
-                error *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+                error *= (1 - exp(-a*Kedge)); // costFunc -> costFunc(1 - e^{-aK})
             }
 
             if (error < 0) {
@@ -731,6 +739,7 @@ public:
         float sum_A = 0; // sum of surface areas of the adjacent faces
         for (const int fid : vertexToFaces[vid]) {
             TopologyFace& face = faces[fid];
+            if (!face.active) {continue;}
             int v0 = face.v[0];
             int v1 = face.v[1];
             int v2 = face.v[2];
@@ -775,6 +784,14 @@ public:
         return gaussianCurvatureEnabled;
     }
 
+    void setAlpha(float aNew) {
+        a = aNew;
+    }
+
+    float getAlpha () const {
+        return a;
+    }
+
     const std::vector<TopologyVertex>& getVertices() const { return vertices; }
     const std::vector<TopologyFace>& getFaces() const { return faces; }
     
@@ -800,6 +817,9 @@ private:
     > edgeToQuadraticError;
     std::map<std::pair<int, int>, glm::vec3> edgeToPos;
     std::map<std::pair<int, int>, float> edgeToCurrentError;
+
+    // Gaussian curvature
+    float a = 1.0f;
 
     bool isValidVertexId(int vid) const {
         return vid >= 0 && vid < static_cast<int>(vertices.size());

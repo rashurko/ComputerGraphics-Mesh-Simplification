@@ -62,8 +62,11 @@ public:
         for (int i = 0; i < edges.size(); i++) {
             const int64_t key = std::next(std::begin(edges), dist(rng))->first;
             const TopologyEdge& edge = edges.at(key);
-            if (!mesh.isLegalCollapse(edge.v0, edge.v1)) {
-                continue;
+
+            if (mesh.useLegal) {
+                if (!mesh.isLegalCollapse(edge.v0, edge.v1)) {
+                    continue;
+                }
             }
 
             const glm::vec3 midpoint =
@@ -93,10 +96,12 @@ public:
             const float length = sqrt(1 / edgeToLength.top().first);
             mesh.popEdgeLengths();
 
-            if (!mesh.isLegalCollapse(shortestEdge.first, shortestEdge.second)) {
-                continue;
+            if (mesh.useLegal) {
+                if (!mesh.isLegalCollapse(shortestEdge.first, shortestEdge.second)) {
+                    continue;
+                }
             }
-
+            
             const glm::vec3 midpoint = 0.5f * (mesh.getVertices()[shortestEdge.first].position + mesh.getVertices()[shortestEdge.second].position);
 
             bestChoice = CollapseChoice{shortestEdge.first, shortestEdge.second, midpoint, length};
@@ -138,11 +143,17 @@ public:
             if (it == edgeToCurrentError.end() || error != it->second) {
                 continue;
             }
-
-            if (!mesh.isLegalCollapse(shortestEdge.first, shortestEdge.second)) {
+            
+            bool isLegal = true;
+            if (mesh.useLegal) {
+                if (!mesh.isLegalCollapse(shortestEdge.first, shortestEdge.second)) {
+                    isLegal = false;
+                }
+            }
+            if (!isLegal) {
                 continue;
             }
-
+            
             const glm::vec3 newPoint = edgeToPos.at(std::make_pair(std::min(shortestEdge.first, shortestEdge.second), std::max(shortestEdge.first, shortestEdge.second)));
 
             bestChoice = CollapseChoice{shortestEdge.first, shortestEdge.second, newPoint, error};
@@ -156,6 +167,8 @@ public:
 
 class SimplificationController {
 public:
+    bool useLegal = false;
+
     void setOriginalMesh(const TopologyMesh& mesh) {
         originalMesh = mesh;
         workingMesh = mesh;
@@ -164,6 +177,10 @@ public:
     void setMode(SimplificationMode newMode) {
         currentMode = newMode;
         reset();
+    }
+
+    void setWorkingMeshUseLegal(bool useLegal) {
+        workingMesh.useLegal = useLegal;
     }
 
     void enableGaussianCurvature() {
@@ -181,9 +198,24 @@ public:
         return gaussianCurvatureEnabled;
     }
 
+    void setAlpha(float aNew) {
+        workingMesh.setAlpha(aNew);
+    }
+
     void reset() {
+        bool useLegal = workingMesh.useLegal;
+        bool useGauss = workingMesh.isGaussianCurvatureEnabled();
+        float alpha = workingMesh.getAlpha();
         workingMesh = originalMesh;
-        gaussianCurvatureEnabled = false;
+
+        workingMesh.useLegal = useLegal;
+        if (useGauss) {
+            workingMesh.enableGaussianCurvature();
+        } else {
+            workingMesh.disableGaussianCurvature();
+        }
+
+        workingMesh.setAlpha(alpha);
     }
 
     bool applyOneStep() {
