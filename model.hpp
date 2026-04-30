@@ -41,6 +41,19 @@ class Model {
             rebuildRenderMeshesFromCurrentTopology();
         }
 
+        void toggleGaussianCurvature() {
+            if (simplifier.isGaussianCurvatureEnabled()) {
+                simplifier.disableGaussianCurvature();
+            } else {
+                simplifier.enableGaussianCurvature();
+            }
+            gaussianCurvatureEnabled = simplifier.isGaussianCurvatureEnabled();
+        }
+
+        bool isGaussianCurvatureEnabled() const {
+            return gaussianCurvatureEnabled;
+        }
+
         void resetSimplification() {
             simplifier.reset();
             pendingCollapses = 0;
@@ -148,6 +161,7 @@ class Model {
         TopologyMesh originalTopology;
         SimplificationController simplifier;
         int pendingCollapses = 0;
+        bool gaussianCurvatureEnabled = false;
 
         struct PositionKey {
             std::uint32_t x = 0;

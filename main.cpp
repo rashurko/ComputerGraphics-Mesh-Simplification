@@ -38,6 +38,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     static bool mode4PressedLastFrame = false;
     static bool mode5PressedLastFrame = false;
     static bool resetPressedLastFrame = false;
+    static bool gaussianCurvPressedLastFrame = false;
 
     const bool mode1PressedNow = glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS;
     const bool mode2PressedNow = glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS;
@@ -45,6 +46,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     const bool mode4PressedNow = glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS;
     const bool mode5PressedNow = glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS;
     const bool resetPressedNow = glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS;
+    const bool gaussianCurvPressedNow = glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS;
 
     if (mode1PressedNow && !mode1PressedLastFrame) {
         model.setSimplificationMode(SimplificationMode::Original);
@@ -70,6 +72,16 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
         model.resetSimplification();
         std::cout << "Reset current mesh in mode: " << model.currentModeName() << std::endl;
     }
+    if (gaussianCurvPressedNow && !gaussianCurvPressedLastFrame) {
+        model.toggleGaussianCurvature();
+        if (model.currentMode() == SimplificationMode::ShortestLegal || model.currentMode() == SimplificationMode::LowestLegalQError) {
+            if (model.isGaussianCurvatureEnabled()) {
+                std::cout << "Gaussian curvature weighting enabled" << std::endl;
+            } else {
+                std::cout << "Gaussian curvature weighting disabled" << std::endl;
+            }
+        }
+    }
 
     mode1PressedLastFrame = mode1PressedNow;
     mode2PressedLastFrame = mode2PressedNow;
@@ -77,6 +89,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     mode4PressedLastFrame = mode4PressedNow;
     mode5PressedLastFrame = mode5PressedNow;
     resetPressedLastFrame = resetPressedNow;
+    gaussianCurvPressedLastFrame = gaussianCurvPressedNow;
 
     static bool decimatePressedLastFrame = false;
     const bool decimatePressedNow = glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS;
