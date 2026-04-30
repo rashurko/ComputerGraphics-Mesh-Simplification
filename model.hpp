@@ -21,6 +21,8 @@
 
 class Model {
     public:
+        bool isCollapsing = false;
+
         Model(std::string path) {
             loadModel(path);
         }
@@ -67,6 +69,10 @@ class Model {
         }
 
         bool processPendingCollapses(int maxStepsPerFrame) {
+            if (!isCollapsing && pendingCollapses > 0) {
+                isCollapsing = true;
+            }
+
             if (pendingCollapses <= 0 || maxStepsPerFrame <= 0) {
                 return false;
             }
@@ -85,10 +91,6 @@ class Model {
                 }
                 pendingCollapses--;
                 changed = true;
-            }
-
-            if (changed) {
-                rebuildRenderMeshesFromCurrentTopology();
             }
 
             return changed;
@@ -152,6 +154,32 @@ class Model {
         glm::vec3 setLocalZ(glm::vec3 newZ) {
             localZ = newZ;
             return localZ;
+        }
+
+        void recomputeNormals() {
+            simplifier.currentMesh().recomputeVertexNormals();
+        }
+
+        void rebuildRenderMeshesFromCurrentTopology() {
+            meshes.clear();
+
+            const TopologyRenderData renderData = simplifier.currentMesh().toRenderData();
+            if (renderData.vertices.empty() || renderData.indices.empty()) {
+                return;
+            }
+
+            std::vector<Vertex> renderVertices;
+            renderVertices.reserve(renderData.vertices.size());
+
+            for (const TopologyRenderVertex& sourceVertex : renderData.vertices) {
+                Vertex vertex;
+                vertex.Position = sourceVertex.position;
+                vertex.Normal = sourceVertex.normal;
+                vertex.TexCoords = sourceVertex.texCoord;
+                renderVertices.push_back(vertex);
+            }
+
+            meshes.emplace_back(renderVertices, renderData.indices, std::vector<Texture>{});
         }
         
     private:
@@ -249,28 +277,6 @@ class Model {
             localX = glm::vec3(1.0f, 0.0f, 0.0f);
             localY = glm::vec3(0.0f, 1.0f, 0.0f);
             localZ = glm::vec3(0.0f, 0.0f, 1.0f);
-        }
-
-        void rebuildRenderMeshesFromCurrentTopology() {
-            meshes.clear();
-
-            const TopologyRenderData renderData = simplifier.currentMesh().toRenderData();
-            if (renderData.vertices.empty() || renderData.indices.empty()) {
-                return;
-            }
-
-            std::vector<Vertex> renderVertices;
-            renderVertices.reserve(renderData.vertices.size());
-
-            for (const TopologyRenderVertex& sourceVertex : renderData.vertices) {
-                Vertex vertex;
-                vertex.Position = sourceVertex.position;
-                vertex.Normal = sourceVertex.normal;
-                vertex.TexCoords = sourceVertex.texCoord;
-                renderVertices.push_back(vertex);
-            }
-
-            meshes.emplace_back(renderVertices, renderData.indices, std::vector<Texture>{});
         }
 
         PositionKey makePositionKey(const glm::vec3& position) const {

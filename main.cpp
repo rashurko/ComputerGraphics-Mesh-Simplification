@@ -228,7 +228,14 @@ int main () {
         // Process the inputs
         // ------------------
         processInput(window, cam, ourModel, deltaTime);
-        ourModel.processPendingCollapses(5);
+        ourModel.processPendingCollapses(ourModel.pendingCollapseCount()); //to change
+        // Recompute normals if needed
+        if (ourModel.pendingCollapseCount() == 0 && ourModel.isCollapsing) {
+            std::cout << "Recomputing normals..." << std::endl;
+            ourModel.isCollapsing = false;
+            ourModel.recomputeNormals();
+            ourModel.rebuildRenderMeshesFromCurrentTopology();
+        }
 
         // Render
         // ------

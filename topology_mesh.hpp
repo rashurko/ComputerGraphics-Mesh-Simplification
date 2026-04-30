@@ -75,7 +75,6 @@ public:
         edgeToPos.clear();
         edgeToCurrentError.clear();
 
-        firstPass = true;
         gaussianCurvatureEnabled = false;
     }
 
@@ -93,76 +92,36 @@ public:
     }
 
     void buildAdjacency() {
-        if (firstPass) {
-            vertexToFaces.assign(vertices.size(), {});
+        vertexToFaces.assign(vertices.size(), {});
 
-            for (TopologyFace& face : faces) {
-                if (!face.active) {
-                    continue;
-                }
-
-                if (!isValidVertexId(face.v[0]) || !isValidVertexId(face.v[1]) || !isValidVertexId(face.v[2])) {
-                    face.active = false;
-                    continue;
-                }
-
-                if (!vertices[face.v[0]].active || !vertices[face.v[1]].active || !vertices[face.v[2]].active) {
-                    face.active = false;
-                    continue;
-                }
-
-                if (face.v[0] == face.v[1] || face.v[1] == face.v[2] || face.v[0] == face.v[2]) {
-                    face.active = false;
-                    continue;
-                }
-
-                for (int vid : face.v) {
-                    vertexToFaces[vid].push_back(face.id);
-                }
-
-                addEdgeFace(face.v[0], face.v[1], face.id);
-                addEdgeFace(face.v[1], face.v[2], face.id);
-                addEdgeFace(face.v[2], face.v[0], face.id);
-
-                firstPass = false;
-                affectedFaces.clear();
+        for (TopologyFace& face : faces) {
+            if (!face.active) {
+                continue;
             }
-        } else {
-            for (const int faceId : affectedFaces) {
-                TopologyFace &face = faces[faceId];
 
-                if (!face.active) {
-                    continue;
-                }
+            if (!isValidVertexId(face.v[0]) || !isValidVertexId(face.v[1]) || !isValidVertexId(face.v[2])) {
+                face.active = false;
+                continue;
+            }
 
-                if (!isValidVertexId(face.v[0]) || !isValidVertexId(face.v[1]) || !isValidVertexId(face.v[2])) {
-                    face.active = false;
-                    continue;
-                }
+            if (!vertices[face.v[0]].active || !vertices[face.v[1]].active || !vertices[face.v[2]].active) {
+                face.active = false;
+                continue;
+            }
 
-                if (!vertices[face.v[0]].active || !vertices[face.v[1]].active || !vertices[face.v[2]].active) {
-                    face.active = false;
-                    continue;
-                }
+            if (face.v[0] == face.v[1] || face.v[1] == face.v[2] || face.v[0] == face.v[2]) {
+                face.active = false;
+                continue;
+            }
 
-                if (face.v[0] == face.v[1] || face.v[1] == face.v[2] || face.v[0] == face.v[2]) {
-                    face.active = false;
-                    continue;
-                }
+            for (int vid : face.v) {
+                vertexToFaces[vid].push_back(face.id);
+            }
 
-                for (int vid : face.v) {
-                    auto &vFaces = vertexToFaces[vid];
-                    if (std::find(vFaces.begin(), vFaces.end(), face.id) == vFaces.end()) {
-                        vFaces.push_back(face.id);
-                    }
-                }
-
-                addEdgeFace(face.v[0], face.v[1], face.id);
-                addEdgeFace(face.v[1], face.v[2], face.id);
-                addEdgeFace(face.v[2], face.v[0], face.id);
-            }            
-        }
-        
+            addEdgeFace(face.v[0], face.v[1], face.id);
+            addEdgeFace(face.v[1], face.v[2], face.id);
+            addEdgeFace(face.v[2], face.v[0], face.id);
+        }     
     }
 
     bool isVertexActive(int vid) const {
@@ -194,25 +153,11 @@ public:
     }
 
     int activeEdgeCount() const {
-        int count = 0;
-        for (const auto& entry : edges) {
-            const TopologyEdge& edge = entry.second;
-            if (isVertexActive(edge.v0) && isVertexActive(edge.v1)) {
-                count++;
-            }
-        }
-        return count;
+        return edges.size();
     }
 
-    std::vector<TopologyEdge> getActiveEdges() const {
-        std::vector<TopologyEdge> result;
-        result.reserve(edges.size());
-        for (const auto& [key, edge] : edges) {
-            if (isVertexActive(edge.v0) && isVertexActive(edge.v1)) {
-                result.push_back(edge);
-            }
-        }
-        return result;
+    const std::unordered_map<std::int64_t, TopologyEdge>& getActiveEdges() const {
+        return edges;
     }
 
     std::vector<int> getVertexNeighbors(int vid) const {
@@ -381,6 +326,7 @@ public:
                 for (int vid : face.v) {
                     auto &vFaces = vertexToFaces[vid];
                     vFaces.erase(std::remove(vFaces.begin(), vFaces.end(), face.id), vFaces.end());
+                    removeEdgeFace(vid, keepVid, face.id);
                 }
                 continue;
             }
@@ -389,16 +335,18 @@ public:
             for (int i = 0; i < 3; i++) {
                 if (face.v[i] == removeVid) {
                     face.v[i] = keepVid;
+                } else {
+                    removeEdge(face.v[i], removeVid);
                 }
             }
 
             vertexToFaces[keepVid].push_back(faceid);
 
+            removeEdge(keepVid, removeVid);
+
             addEdgeFace(face.v[0], face.v[1], face.id);
             addEdgeFace(face.v[1], face.v[2], face.id);
             addEdgeFace(face.v[2], face.v[0], face.id);
-
-            affectedFaces.push_back(faceid);            
         }
 
         vertices[removeVid].active = false;
@@ -409,7 +357,10 @@ public:
 
     TopologyRenderData toRenderData() {
         TopologyRenderData renderData;
-        recomputeVertexNormals();
+        if (vertexNormals.size() != vertices.size()) {
+            recomputeVertexNormals();
+            std::cout << "first pass" << std::endl;
+        }
 
         for (const TopologyFace& face : faces) {
             if (!face.active) {
@@ -432,126 +383,56 @@ public:
     }
 
     void recomputeFaceNormals() {
-        // On first run
-        if (faceNormals.size() != faces.size()) {
-            faceNormals.assign(faces.size(), { -1, glm::vec3(0.0f)});
-            for (TopologyFace &face : faces) {
-                if (!face.active) {
-                    continue;
-                }
-
-                const glm::vec3& p0 = vertices[face.v[0]].position;
-                const glm::vec3& p1 = vertices[face.v[1]].position;
-                const glm::vec3& p2 = vertices[face.v[2]].position;
-
-                glm::vec3 normal = glm::cross(p1 - p0, p2 - p0);
-                const float length = glm::length(normal);
-                if (length > 1e-8f) {
-                    normal /= length;
-                }
-                faceNormals[face.id].faceId = face.id;
-                faceNormals[face.id].normal = normal;
-            }
-        } else {
-            for (const int faceId : affectedFaces) {
-            if (!isFaceActive(faceId)) {
+        faceNormals.assign(faces.size(), { -1, glm::vec3(0.0f)});
+        for (TopologyFace &face : faces) {
+            if (!face.active) {
                 continue;
             }
 
-            const glm::vec3& p0 = vertices[faces[faceId].v[0]].position;
-            const glm::vec3& p1 = vertices[faces[faceId].v[1]].position;
-            const glm::vec3& p2 = vertices[faces[faceId].v[2]].position;
+            const glm::vec3& p0 = vertices[face.v[0]].position;
+            const glm::vec3& p1 = vertices[face.v[1]].position;
+            const glm::vec3& p2 = vertices[face.v[2]].position;
 
             glm::vec3 normal = glm::cross(p1 - p0, p2 - p0);
             const float length = glm::length(normal);
             if (length > 1e-8f) {
                 normal /= length;
             }
-            faceNormals[faceId].faceId = faceId;
-            faceNormals[faceId].normal = normal;
-            }
-        }
+            faceNormals[face.id].faceId = face.id;
+            faceNormals[face.id].normal = normal;
+        }   
     }
 
     void recomputeVertexNormals() {
         recomputeFaceNormals();
-
-        // On first run
-        if (vertexNormals.size() != vertices.size()) {
-            vertexNormals.assign(vertices.size(), { -1, glm::vec3(0.0f) });
-                for (const TopologyFace& face : faces) {
-                    if (!face.active) {
-                        continue;
-                    }
-    
-                    for (int vid : face.v) {
-                        if (isVertexActive(vid)) {
-                            vertexNormals[vid].normal += faceNormals[face.id].normal;
-                            vertexNormals[vid].vertexId = vid;
-                        }
-                    }
-                }
-
-                for (std::size_t i = 0; i < vertexNormals.size(); ++i) {
-                    const float length = glm::length(vertexNormals[i].normal);
-                    if (length > 1e-8f) {
-                        vertexNormals[i].normal /= length;
-                    } else {
-                        vertexNormals[i].normal = glm::vec3(0.0f, 1.0f, 0.0f);
-                    }
-                }
-
-        } else {
-            std::vector<int> affectedVertices;
-            for (const int faceId : affectedFaces) {
-                if (!isFaceActive(faceId)) {
-                    continue;
-                }
-
-                for (int vid : faces[faceId].v) {
-                    if (isVertexActive(vid)) {
-                        affectedVertices.push_back(vid);
-                    }
-                }
+        vertexNormals.assign(vertices.size(), { -1, glm::vec3(0.0f) });
+        for (const TopologyFace& face : faces) {
+            if (!face.active) {
+                continue;
             }
 
-            // remove duplicate vertex normals
-            std::sort(affectedVertices.begin(), affectedVertices.end());
-            affectedVertices.erase(std::unique(affectedVertices.begin(), affectedVertices.end()), affectedVertices.end());
-
-            // Clear affected vertex normals
-            for (int vid : affectedVertices) {
-                vertexNormals[vid].normal = glm::vec3(0.0f);
-            }
-
-            // Recompute affected vertex normals
-            for (int vid : affectedVertices) {
-                for (const int faceId : vertexToFaces[vid]) {
-                    if (!isFaceActive(faceId)) {
-                        continue;
-                    }
-                    vertexNormals[vid].normal += faceNormals[faceId].normal;
-                }
-            }
-
-            // Normalize the affected vertex normals
-            for (int vid : affectedVertices) {
-                const float length = glm::length(vertexNormals[vid].normal);
-                if (length > 1e-8f) {
-                    vertexNormals[vid].normal /= length;
-                } else {
-                    vertexNormals[vid].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+            for (int vid : face.v) {
+                if (isVertexActive(vid)) {
+                    vertexNormals[vid].normal += faceNormals[face.id].normal;
+                    vertexNormals[vid].vertexId = vid;
                 }
             }
         }
 
-        affectedFaces.clear();
+        for (std::size_t i = 0; i < vertexNormals.size(); ++i) {
+            const float length = glm::length(vertexNormals[i].normal);
+            if (length > 1e-8f) {
+                vertexNormals[i].normal /= length;
+            } else {
+                vertexNormals[i].normal = glm::vec3(0.0f, 1.0f, 0.0f);
+            }
+        }
     }
 
     // Shortest edge removal
     // ---------------------
     void precomputeEdgeLengths() {
-        for (const TopologyEdge& edge : getActiveEdges()) {
+        for (const auto& [key, edge] : edges) {
             int v0 = edge.v0;
             int v1 = edge.v1;
             // Length calculation
@@ -617,13 +498,13 @@ public:
         edgeToLength.pop();
     }
 
-    const std::priority_queue<std::pair<float, std::pair<int, int>>>& getEdgeToLength() const { return edgeToLength; }
-    const std::map<std::pair<int, int>, std::pair<std::vector<int>, std::vector<int>>>& getEdgeToNeighbors() const { return edgeToNeighbors; }
+    std::priority_queue<std::pair<float, std::pair<int, int>>>& getEdgeToLength() { return edgeToLength; }
+    std::map<std::pair<int, int>, std::pair<std::vector<int>, std::vector<int>>>& getEdgeToNeighbors() { return edgeToNeighbors; }
 
     // Lowest quadratic error removal
     // -----------------------------
     void precomputeQuadraticErrors() {
-        for (const TopologyEdge& edge : getActiveEdges()) {
+        for (const auto& [key, edge] : edges) {
             int v0 = edge.v0;
             int v1 = edge.v1;
 
@@ -828,13 +709,13 @@ public:
         edgeToQuadraticError.pop();
     }
 
-    const std::priority_queue<
-        std::pair<float, std::pair<int, int>>, 
-        std::vector<std::pair<float, std::pair<int, int>>>, 
-        std::greater<std::pair<float, std::pair<int, int>>>
-    > getEdgeToQuadraticError() const { return edgeToQuadraticError; }
-    const std::map<std::pair<int, int>, glm::vec3>& getEdgeToPos() const { return edgeToPos; }
-    const std::map<std::pair<int, int>, float>& getEdgeToCurrentError() const { return edgeToCurrentError; }
+    std::priority_queue<
+    std::pair<float, std::pair<int, int>>, 
+    std::vector<std::pair<float, std::pair<int, int>>>, 
+    std::greater<std::pair<float, std::pair<int, int>>>
+    >& getEdgeToQuadraticError() { return edgeToQuadraticError; }
+    std::map<std::pair<int, int>, glm::vec3>& getEdgeToPos() { return edgeToPos; }
+    std::map<std::pair<int, int>, float>& getEdgeToCurrentError() { return edgeToCurrentError; }
 
     // Gaussian curvature
     // ------------------
@@ -920,10 +801,6 @@ private:
     std::map<std::pair<int, int>, glm::vec3> edgeToPos;
     std::map<std::pair<int, int>, float> edgeToCurrentError;
 
-    // Affected faces
-    bool firstPass = true;
-    std::vector<int> affectedFaces;
-
     bool isValidVertexId(int vid) const {
         return vid >= 0 && vid < static_cast<int>(vertices.size());
     }
@@ -939,10 +816,36 @@ private:
         const int hi = std::max(a, b);
         std::int64_t key = edgeKey(lo, hi);
 
-        TopologyEdge edge = {lo, hi, {faceId}};
-        auto [it, inserted] = edges.emplace(key, edge);
-        it->second.faceIds.push_back(faceId);
+        if (edges.find(key) != edges.end()) {
+            if (std::find(edges[key].faceIds.begin(), edges[key].faceIds.end(), faceId) == edges[key].faceIds.end()) {
+                edges[key].faceIds.push_back(faceId);
+            }
+        } else {
+            TopologyEdge edge = {lo, hi, {faceId}};
+            auto [it, inserted] = edges.emplace(key, edge);
+        }
     }
+
+    void removeEdgeFace(int a, int b, int faceId) {
+        const int lo = std::min(a, b);
+        const int hi = std::max(a, b);
+        std::int64_t key = edgeKey(lo, hi);
+
+        auto it = edges.find(key);
+        if (it != edges.end()) {
+            auto& faceIds = it->second.faceIds;
+            faceIds.erase(std::remove(faceIds.begin(), faceIds.end(), faceId), faceIds.end());
+        }
+    }
+
+    void removeEdge(int a, int b) {
+        const int lo = std::min(a, b);
+        const int hi = std::max(a, b);
+        std::int64_t key = edgeKey(lo, hi);
+
+        edges.erase(key);
+    }
+
 
     std::vector<int> getSharedFaces(int a, int b) const {
         std::vector<int> shared;
@@ -960,8 +863,7 @@ private:
     }
 
     void removeDegenerateFaces() {
-        for (int fid : affectedFaces) {
-            TopologyFace& face = faces[fid];
+        for (TopologyFace& face : faces) {
             if (!face.active) {
                 continue;
             }
