@@ -22,6 +22,7 @@
 class Model {
     public:
         bool isCollapsing = false;
+        bool useLegal = false;
 
         Model(std::string path) {
             loadModel(path);
@@ -43,6 +44,11 @@ class Model {
             rebuildRenderMeshesFromCurrentTopology();
         }
 
+        void setUseLegal(bool useLegal) {
+            simplifier.useLegal = useLegal;
+            simplifier.setWorkingMeshUseLegal(useLegal);
+        }
+
         void toggleGaussianCurvature() {
             if (simplifier.isGaussianCurvatureEnabled()) {
                 simplifier.disableGaussianCurvature();
@@ -52,8 +58,20 @@ class Model {
             gaussianCurvatureEnabled = simplifier.isGaussianCurvatureEnabled();
         }
 
+        void setGaussianCurvature(bool useGaussianCurvature) {
+            if (useGaussianCurvature) {
+                simplifier.enableGaussianCurvature();
+            } else {
+                simplifier.disableGaussianCurvature();
+            }
+        }
+
         bool isGaussianCurvatureEnabled() const {
             return gaussianCurvatureEnabled;
+        }
+
+        void setAlpha(float aNew) {
+            simplifier.setAlpha(aNew);
         }
 
         void resetSimplification() {
