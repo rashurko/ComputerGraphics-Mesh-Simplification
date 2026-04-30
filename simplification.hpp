@@ -105,6 +105,7 @@ public:
 };
 
 class LowestQuadraticErrorStrategy : public SimplificationStrategy {
+public:
     std::optional<CollapseChoice> chooseCollapse(TopologyMesh& mesh) override {
         std::optional<CollapseChoice> bestChoice;
 
@@ -120,7 +121,6 @@ class LowestQuadraticErrorStrategy : public SimplificationStrategy {
             const float error = mesh.getEdgeToQuadraticError().top().first;
             mesh.popQuadraticError();
 
-    
             const auto& currentErrors = mesh.getEdgeToCurrentError();
             auto it = currentErrors.find(shortestEdge);   
             // If the edge was completely erased, or the error doesn't match
@@ -155,8 +155,24 @@ public:
         reset();
     }
 
+    void enableGaussianCurvature() {
+        gaussianCurvatureEnabled = true;
+        workingMesh.enableGaussianCurvature();
+        workingMesh.precomputeGaussianCurvatures();
+    }
+
+    void disableGaussianCurvature() {
+        gaussianCurvatureEnabled = false;
+        workingMesh.disableGaussianCurvature();
+    }
+
+    bool isGaussianCurvatureEnabled() {
+        return gaussianCurvatureEnabled;
+    }
+
     void reset() {
         workingMesh = originalMesh;
+        gaussianCurvatureEnabled = false;
     }
 
     bool applyOneStep() {
@@ -195,6 +211,7 @@ private:
     TopologyMesh originalMesh;
     TopologyMesh workingMesh;
     SimplificationMode currentMode = SimplificationMode::Original;
+    bool gaussianCurvatureEnabled = false;
 
     std::unique_ptr<SimplificationStrategy> makeStrategy() const {
         switch (currentMode) {

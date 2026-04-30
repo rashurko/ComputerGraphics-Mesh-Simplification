@@ -16,6 +16,7 @@ struct TopologyVertex {
     int id = -1;
     glm::vec3 position = glm::vec3(0.0f);
     glm::mat4 Q{0.0f}; // For quadratic error 
+    float K; // Approximation of the Gaussian curvature
     bool active = true;
 };
 
@@ -66,7 +67,16 @@ public:
         edgeToLength =  std::priority_queue<std::pair<float, std::pair<int, int>>>();
         edgeToNeighbors.clear();
 
+        edgeToQuadraticError = std::priority_queue<
+        std::pair<float, std::pair<int, int>>, 
+        std::vector<std::pair<float, std::pair<int, int>>>, 
+        std::greater<std::pair<float, std::pair<int, int>>>
+        >();
+        edgeToPos.clear();
+        edgeToCurrentError.clear();
+
         firstPass = true;
+        gaussianCurvatureEnabled = false;
     }
 
     int addVertex(const glm::vec3& position) {
@@ -358,36 +368,42 @@ public:
         vertices[keepVid].position = newPos;
         vertices[keepVid].Q += vertices[removeVid].Q;
 
-        for (const auto& faceid : vertexToFaces[removeVid]) {
+        std::vector<int> incidentFaces = vertexToFaces[removeVid];
+
+        for (const int faceid : incidentFaces) {
             TopologyFace& face = faces[faceid];
             if (!face.active) {
                 continue;
             }
 
-            bool touched = false;
-            // Update face vertices
-            for (int& vid : face.v) {
-                if (vid == removeVid) {
-                    vid = keepVid;
-                    touched = true;
+            if (face.v[0] == keepVid || face.v[1] == keepVid || face.v[2] == keepVid) {
+                face.active = false;
+                for (int vid : face.v) {
+                    auto &vFaces = vertexToFaces[vid];
+                    vFaces.erase(std::remove(vFaces.begin(), vFaces.end(), face.id), vFaces.end());
                 }
-            }
-
-            if (!touched) {
                 continue;
             }
 
-            if (face.v[0] == face.v[1] || face.v[1] == face.v[2] || face.v[0] == face.v[2]) {
-                face.active = false;
+            // Rewire the face indices
+            for (int i = 0; i < 3; i++) {
+                if (face.v[i] == removeVid) {
+                    face.v[i] = keepVid;
+                }
             }
 
-            affectedFaces.push_back(face.id);
+            vertexToFaces[keepVid].push_back(faceid);
+
+            addEdgeFace(face.v[0], face.v[1], face.id);
+            addEdgeFace(face.v[1], face.v[2], face.id);
+            addEdgeFace(face.v[2], face.v[0], face.id);
+
+            affectedFaces.push_back(faceid);            
         }
 
         vertices[removeVid].active = false;
+        vertexToFaces[removeVid].clear();
 
-        removeDegenerateFaces();
-        buildAdjacency();
         return true;
     }
 
@@ -540,10 +556,15 @@ public:
             int v1 = edge.v1;
             // Length calculation
             const glm::vec3 delta = getVertices()[v0].position - getVertices()[v1].position;
-            const float length = glm::dot(delta, delta);
+            float length = glm::dot(delta, delta);
             // Associated vertex neighbors
             std::vector<int> v0Neighbors = getVertexNeighbors(v0);
             std::vector<int> v1Neighbors = getVertexNeighbors(v1);
+
+            if (gaussianCurvatureEnabled) {
+                float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
+                length *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+            }
 
             edgeToLength.emplace(1/length, std::make_pair(std::min(v0, v1), std::max(v0, v1)));
             edgeToNeighbors.emplace(std::make_pair(std::min(v0, v1), std::max(v0, v1)), std::make_pair(v0Neighbors, v1Neighbors));
@@ -559,9 +580,15 @@ public:
                 continue;
             }
 
-            const glm::vec3 delta = getVertices()[collapseEdge.first].position - getVertices()[n].position;
-            const float length = glm::dot(delta, delta);
-            edgeToLength.emplace(1/length, std::make_pair(std::min(collapseEdge.first, n), std::max(collapseEdge.first, n)));
+            TopologyVertex& v0 = vertices[collapseEdge.first];
+            TopologyVertex& v1 = vertices[n];
+            const glm::vec3 delta = v0.position - v1.position;
+            float length = glm::dot(delta, delta);
+            if (gaussianCurvatureEnabled) {
+                float Kedge = std::abs(v0.K) + std::abs(v1.K);
+                length *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+            }
+            edgeToLength.emplace(1/length, std::make_pair(std::min(v0.id, v1.id), std::max(v0.id, v1.id)));
         }
 
         for (const int n : neighbors.second) {
@@ -570,12 +597,19 @@ public:
                 continue;
             }
 
+            TopologyVertex& v0 = vertices[collapseEdge.first];
+            TopologyVertex& v1 = vertices[n];
+
             // Delete all pairs with the second vertex of the edge
             edgeToNeighbors.erase(std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
 
-            const glm::vec3 delta = getVertices()[collapseEdge.second].position - getVertices()[n].position;
-            const float length = glm::dot(delta, delta);
-            edgeToLength.emplace(1/length, std::make_pair(std::min(collapseEdge.second, n), std::max(collapseEdge.second, n)));
+            const glm::vec3 delta = v0.position - v1.position;
+            float length = glm::dot(delta, delta);
+            if (gaussianCurvatureEnabled) {
+                float Kedge = std::abs(v0.K) + std::abs(v1.K);
+                length *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+            }
+            edgeToLength.emplace(1/length, std::make_pair(std::min(v0.id, v1.id), std::max(v0.id, v1.id)));
         }
     }
 
@@ -596,6 +630,12 @@ public:
             std::tuple<glm::vec3, float> solution = solveQuadratic(edge);
             glm::vec3 vPos(std::get<0>(solution));
             float error = std::get<1>(solution);
+
+            if (gaussianCurvatureEnabled) {
+                float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
+                error *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+            }
+
             // Check whether the solution is valid
             if (error < -0.1f) {
                 continue;
@@ -676,9 +716,18 @@ public:
             }
 
             TopologyEdge edge = {std::min(collapseEdge.first, n), std::max(collapseEdge.first, n), commonFaces};
+            int v0 = edge.v0;
+            int v1 = edge.v1;
+
             std::tuple<glm::vec3, float> solution = solveQuadratic(edge);
             glm::vec3 vPos = std::get<0>(solution);
             float error = std::get<1>(solution);
+
+            if (gaussianCurvatureEnabled) {
+                float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
+                error *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+            }
+
             if (error < 0) {
                 continue;
             }
@@ -711,9 +760,18 @@ public:
             }
 
             TopologyEdge edge = {std::min(collapseEdge.first, n), std::max(collapseEdge.first, n), commonFaces};
+            int v0 = edge.v0;
+            int v1 = edge.v1;
+
             std::tuple<glm::vec3, float> solution = solveQuadratic(edge);
             glm::vec3 vPos = std::get<0>(solution);
             float error = std::get<1>(solution);
+
+            if (gaussianCurvatureEnabled) {
+                float Kedge = std::abs(vertices[v0].K) + std::abs(vertices[v1].K);
+                error *= (1 - exp(-Kedge)); // costFunc -> costFunc(1 - e^{-aK}) with a = 1
+            }
+
             if (error < 0) {
                 continue;
             }
@@ -778,6 +836,64 @@ public:
     const std::map<std::pair<int, int>, glm::vec3>& getEdgeToPos() const { return edgeToPos; }
     const std::map<std::pair<int, int>, float>& getEdgeToCurrentError() const { return edgeToCurrentError; }
 
+    // Gaussian curvature
+    // ------------------
+    void precomputeGaussianCurvatures() {
+        for (TopologyVertex &v : vertices) {
+            float vid = v.id;
+            computeK(vid);
+        }
+    }
+
+    void computeK(const int vid) {
+        float sum_angles = 0; // sum of the adjacent angles to the vertex
+        float sum_A = 0; // sum of surface areas of the adjacent faces
+        for (const int fid : vertexToFaces[vid]) {
+            TopologyFace& face = faces[fid];
+            int v0 = face.v[0];
+            int v1 = face.v[1];
+            int v2 = face.v[2];
+            std::vector<int> oppositeVertices; // vids not equal to the seed vertex (vid)
+            for (int vidFace : {v0, v1, v2}) {
+                if (vidFace != vid) {
+                    oppositeVertices.push_back(vidFace);
+                }
+            }
+
+            if (oppositeVertices.size() != 2) {
+                continue;
+            }
+            
+            // Basis vectors of the triangle
+            glm::vec3 e1 = vertices[oppositeVertices[0]].position - vertices[vid].position;
+            glm::vec3 e2 = vertices[oppositeVertices[1]].position - vertices[vid].position;
+
+            float dot = glm::dot(e1, e2);
+            float angle = std::abs(acos(dot / (glm::length(e1) * glm::length(e2))));
+            float A = 0.5f * std::abs(glm::length(e1) * glm::length(e2) * sin(angle));
+
+            sum_angles += angle;
+            sum_A += A;
+        }
+
+        // If the area = 0: the vertex doesn't play a role => huge curvature to remove it first
+        if (sum_A <= 0) {
+            vertices[vid].K = 1e6;
+        }
+
+        vertices[vid].K = 3*(2*M_PI - sum_angles) / sum_A;
+    }
+
+    void enableGaussianCurvature() {
+        gaussianCurvatureEnabled = true;
+    }
+    void disableGaussianCurvature() {
+        gaussianCurvatureEnabled = false;
+    }
+    bool isGaussianCurvatureEnabled() {
+        return gaussianCurvatureEnabled;
+    }
+
     const std::vector<TopologyVertex>& getVertices() const { return vertices; }
     const std::vector<TopologyFace>& getFaces() const { return faces; }
     
@@ -789,6 +905,7 @@ private:
     std::vector<TopologyFaceNormal> faceNormals;
     std::unordered_map<std::int64_t, TopologyEdge> edges;
     std::vector<std::vector<int>> vertexToFaces;
+    bool gaussianCurvatureEnabled = false;
 
     // For shortest edge removal
     std::priority_queue<std::pair<float, std::pair<int, int>>> edgeToLength;
@@ -822,7 +939,8 @@ private:
         const int hi = std::max(a, b);
         std::int64_t key = edgeKey(lo, hi);
 
-        auto [it, inserted] = edges.emplace(key, TopologyEdge{ lo, hi, {} });
+        TopologyEdge edge = {lo, hi, {faceId}};
+        auto [it, inserted] = edges.emplace(key, edge);
         it->second.faceIds.push_back(faceId);
     }
 
