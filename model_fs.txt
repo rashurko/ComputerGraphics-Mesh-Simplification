@@ -34,7 +34,7 @@
         vec3 specular = pow(1/dist, 2) * specularStrength * spec * lightColor;
 
         // The resulting color 
-        vec3 result = (ambient + diffuse + specular) * objectColor * VertexColor;
+        vec3 result = (ambient + diffuse + specular) * VertexColor;
 
         FragColor = vec4(result, 1.0);
     }

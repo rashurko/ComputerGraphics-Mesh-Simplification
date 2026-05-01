@@ -1384,6 +1384,7 @@ CMakeFiles/main.dir/main.cpp.o: /home/izpodperda/University/Master/Computer\ Gra
   /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
   /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
   /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/mesh.hpp \
+  /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metrics.hpp \
   /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/model.hpp \
   /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/portable-file-dialogs.h \
   /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/shader.hpp \
@@ -2111,10 +2112,6 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 
 /usr/include/c++/13/bits/stl_multiset.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
-
-/usr/include/c++/13/bits/stl_multimap.h:
-
 /usr/include/c++/13/bits/stl_function.h:
 
 /usr/include/c++/13/bits/stl_construct.h:
@@ -2442,6 +2439,12 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/ext/matrix_float2x3.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
+
+/usr/include/c++/13/bits/stl_multimap.h:
+
+/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metrics.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
 
@@ -2874,6 +2877,12 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 /usr/lib/gcc/x86_64-linux-gnu/13/include/rdseedintrin.h:
 
 /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/ext/matrix_float4x2_precision.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+
+/usr/include/c++/13/bits/ostream.tcc:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/rtmintrin.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/lwpintrin.h:
 
@@ -3362,9 +3371,3 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/include/c++/13/bits/nested_exception.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/rtmintrin.h:
-
-/usr/include/c++/13/bits/ostream.tcc:

@@ -455,7 +455,7 @@ public:
             for (int i = 0; i < 3; ++i) {
                 const int vid = face.v[i];
                 if (isVertexActive(vid)) {
-                    vertexNormals[vid].normal += cornerAngles[i] * faceNormals[face.id].normal;
+                    vertexNormals[vid].normal += faceNormals[face.id].normal; // removed multiplication with the angles because it breaks rendering when simplifying meshes, maybe there is a need to add edge cases for this
                     vertexNormals[vid].vertexId = vid;
                 }
             }
