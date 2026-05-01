@@ -60,6 +60,10 @@ public:
     TopologyMesh() = default;
 
     bool useLegal = false;
+    // Color mapping
+    bool showCurvature = false;
+    bool curvComputed = false;
+    float maxK = 1.0f;
 
     void clear() {
         vertices.clear();
@@ -372,6 +376,16 @@ public:
             recomputeVertexNormals();
         }
 
+        float minK = FLT_MAX;
+        float maxK = -FLT_MAX;
+        if (showCurvature) {
+            for (const auto& v : vertices) {
+            float val = std::abs(v.K);
+            minK = std::min(minK, val);
+            maxK = std::max(maxK, val);
+            }
+        }
+
         for (const TopologyFace& face : faces) {
             if (!face.active) {
                 continue;
@@ -384,6 +398,12 @@ public:
                 renderVertex.normal = vertexNormals[vid].normal;
                 renderVertex.texCoord = glm::vec2(0.0f);
                 renderVertex.color = face.color;
+
+                if (showCurvature) {
+                    float K = vertices[vid].K;
+                    K = (K - minK) / (maxK - minK);
+                    renderVertex.color = getCurvatureColor(std::abs(K), 0, this->maxK);
+                }
 
                 renderData.vertices.push_back(renderVertex);
                 renderData.indices.push_back(static_cast<unsigned int>(renderData.indices.size()));
@@ -804,6 +824,35 @@ public:
 
     float getAlpha () const {
         return a;
+    }
+
+    void setShowCurvature(bool showCurv) {
+        showCurvature = showCurv;
+        if (showCurv && !curvComputed) {
+            precomputeGaussianCurvatures();
+            curvComputed = true;
+        } else {
+            curvComputed = false;
+        }
+    }
+
+    void setMaxK(float maxK) {
+        this->maxK = maxK;
+    }
+
+    // Curvature to color mapping
+    // --------------------------
+    glm::vec3 getCurvatureColor(float K, float minK, float maxK) {
+        // Normalize K between 0 and 1
+        float t = (K - minK) / (maxK - minK + 1e-6f);
+        t = glm::clamp(t, 0.0f, 1.0f);
+
+        // Blue-Green-Red
+        float r = glm::clamp(2.0f * t - 1.0f, 0.0f, 1.0f);
+        float b = glm::clamp(1.0f - 2.0f * t, 0.0f, 1.0f);
+        float g = 1.0f - r - b;
+
+        return glm::vec3(r, g, b);
     }
 
     const std::vector<TopologyVertex>& getVertices() const { return vertices; }

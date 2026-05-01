@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification"
+CMAKE_SOURCE_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build"
+CMAKE_BINARY_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/metro_tool.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/metro_tool.dir/progress.make
 include CMakeFiles/metro_tool.dir/flags.make
 
 CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o: CMakeFiles/metro_tool.dir/flags.make
-CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o: /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp
+CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o: /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp
 CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o: CMakeFiles/metro_tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o -MF CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o.d -o CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o -c "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o -MF CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o.d -o CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o -c "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp"
 
 CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp" > CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp" > CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.i
 
 CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp" -o CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp" -o CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.s
 
 CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o: CMakeFiles/metro_tool.dir/flags.make
-CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o: /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp
+CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o: /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp
 CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o: CMakeFiles/metro_tool.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o -MF CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o.d -o CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o -c "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o -MF CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o.d -o CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o -c "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp"
 
 CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp" > CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp" > CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.i
 
 CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp" -o CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp" -o CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.s
 
 # Object files for target metro_tool
 metro_tool_OBJECTS = \
@@ -105,15 +105,15 @@ metro_tool_OBJECTS = \
 # External object files for target metro_tool
 metro_tool_EXTERNAL_OBJECTS =
 
-/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o
-/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o
-/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/build.make
-/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable \"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro\""
+/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o
+/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o
+/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/build.make
+/home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro: CMakeFiles/metro_tool.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable \"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro\""
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/metro_tool.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/metro_tool.dir/build: /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro
+CMakeFiles/metro_tool.dir/build: /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro
 .PHONY : CMakeFiles/metro_tool.dir/build
 
 CMakeFiles/metro_tool.dir/clean:
@@ -121,6 +121,6 @@ CMakeFiles/metro_tool.dir/clean:
 .PHONY : CMakeFiles/metro_tool.dir/clean
 
 CMakeFiles/metro_tool.dir/depend:
-	cd "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles/metro_tool.dir/DependInfo.cmake" "--color=$(COLOR)"
+	cd "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build/CMakeFiles/metro_tool.dir/DependInfo.cmake" "--color=$(COLOR)"
 .PHONY : CMakeFiles/metro_tool.dir/depend
 

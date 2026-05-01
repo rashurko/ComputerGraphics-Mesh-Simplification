@@ -1,5 +1,5 @@
 CMakeFiles/main.dir/glad/src/gl.c.o: \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/src/gl.c \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/src/gl.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -52,8 +52,8 @@ CMakeFiles/main.dir/glad/src/gl.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include/glad/gl.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include/KHR/khrplatform.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/include/glad/gl.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \

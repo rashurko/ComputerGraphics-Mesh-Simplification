@@ -168,6 +168,7 @@ public:
 class SimplificationController {
 public:
     bool useLegal = false;
+    bool showCurv = false;
 
     void setOriginalMesh(const TopologyMesh& mesh) {
         originalMesh = mesh;
@@ -181,6 +182,15 @@ public:
 
     void setWorkingMeshUseLegal(bool useLegal) {
         workingMesh.useLegal = useLegal;
+    }
+
+    void setShowCurv(bool showCurv) {
+        workingMesh.setShowCurvature(showCurv);
+        this->showCurv = showCurv;
+    }
+
+    void setMaxK(float maxK) {
+        workingMesh.setMaxK(maxK);
     }
 
     void enableGaussianCurvature() {
@@ -205,10 +215,14 @@ public:
     void reset() {
         bool useLegal = workingMesh.useLegal;
         bool useGauss = workingMesh.isGaussianCurvatureEnabled();
+        bool showCurv = workingMesh.showCurvature;
         float alpha = workingMesh.getAlpha();
+        float maxK = workingMesh.maxK;
         workingMesh = originalMesh;
 
         workingMesh.useLegal = useLegal;
+        workingMesh.setShowCurvature(showCurv);
+        workingMesh.setMaxK(maxK);
         if (useGauss) {
             workingMesh.enableGaussianCurvature();
         } else {

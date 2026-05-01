@@ -28,6 +28,7 @@ class Model {
     public:
         bool isCollapsing = false;
         bool useLegal = false;
+        bool showCurv = false;
 
         Model(std::string path) {
             loadModel(path);
@@ -83,6 +84,17 @@ class Model {
             }
             gaussianCurvatureEnabled = simplifier.isGaussianCurvatureEnabled();
             clearProgressiveMeshes();
+        }
+
+        void setShowCurv(bool showCurv) {
+            simplifier.setShowCurv(showCurv);
+            this->showCurv = showCurv;
+            rebuildRenderMeshesFromCurrentTopology();
+        }
+
+        void setMaxK(float maxK) {
+            simplifier.setMaxK(maxK);
+            rebuildRenderMeshesFromCurrentTopology();
         }
 
         bool isGaussianCurvatureEnabled() const {

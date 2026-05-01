@@ -14,6 +14,7 @@
 #include "shader.hpp"
 #include "model.hpp"
 #include "camera.hpp"
+#include "metrics.hpp"
 
 #include <algorithm>
 #include <cctype>
@@ -162,6 +163,9 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 // process the mouse button
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+
+// Draw the curvature scale bar
+void DrawCurvatureLegend(float minK, float maxK);
 
 // Settings
 // --------
@@ -482,7 +486,39 @@ int main () {
             cam.reset_for_model(ourModel.boundingRadius());
         }
 
+        ImGui::SameLine();
+        static float maxK = 1.0f;
+        static bool showCurv = false;
+        if (ImGui::Checkbox("Show Curvature", &showCurv)) {
+            ourModel.setShowCurv(showCurv);
+        }
+        if (ImGui::SliderFloat("Max K", &maxK, 0.0f, 1.0f)) {
+            ourModel.setMaxK(maxK);
+        }
+
+        static QualityMetrics metrics;
+        if (ImGui::Button("Calculate Error")) {
+            if (ourModel.isSaved()) {
+            std::string command = "./metro \"" + ourModel.getOriginalPath() + "\" \"" + ourModel.getSimplifiedPath() + "\" -c > results.txt";
+            system(command.c_str());
+
+            metrics = parseMetroResults("results.txt");
+            }
+        }
+        // Display the errors
+        if (metrics.success) {
+            ImGui::BulletText("Hausdorff: %.6f", metrics.hausdorff);
+            ImGui::BulletText("RMS: %.6f", metrics.rms);
+        } else {
+            ImGui::TextDisabled("Error");
+        }
+
         ImGui::End();
+
+        // Draw curvature scale bar
+        if (showCurv) {
+            DrawCurvatureLegend(0.0f, maxK);
+        }
 
         // ImGui: render ImGui
         ImGui::Render();
@@ -543,4 +579,50 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
         cam.leftMousePressed = false;
     }
+}
+
+void DrawCurvatureLegend(float minK, float maxK) {
+    ImGui::SetNextWindowBgAlpha(0.2f);
+    ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize;
+    ImGui::SetNextWindowPos(ImVec2(600, 40), ImGuiCond_FirstUseEver);
+
+    if (!ImGui::Begin("Curvature K")) {
+        ImGui::End();
+        return;
+    }
+
+    ImVec2 startPos = ImGui::GetCursorScreenPos();
+    
+    float barWidth = 30.0f;
+    float barHeight = 200.0f;
+    ImDrawList* drawList = ImGui::GetWindowDrawList();
+
+    ImU32 colBlue  = IM_COL32(0, 0, 255, 255);
+    ImU32 colGreen = IM_COL32(0, 255, 0, 255);
+    ImU32 colRed   = IM_COL32(255, 0, 0, 255);
+
+    drawList->AddRectFilledMultiColor(
+        startPos, 
+        ImVec2(startPos.x + barWidth, startPos.y + barHeight / 2.0f),
+        colRed, colRed, colGreen, colGreen
+    );
+    drawList->AddRectFilledMultiColor(
+        ImVec2(startPos.x, startPos.y + barHeight / 2.0f), 
+        ImVec2(startPos.x + barWidth, startPos.y + barHeight),
+        colGreen, colGreen, colBlue, colBlue
+    );
+
+    float labelX = startPos.x + barWidth + 10.0f;
+
+    ImGui::SetCursorScreenPos(ImVec2(labelX, startPos.y));
+    ImGui::Text("%.4f", maxK);
+
+    ImGui::SetCursorScreenPos(ImVec2(labelX, startPos.y + barHeight - ImGui::GetFontSize()));
+    ImGui::Text("%.4f", minK);
+
+
+    ImGui::SetCursorScreenPos(ImVec2(startPos.x, startPos.y));
+    ImGui::Dummy(ImVec2(barWidth + 100.0f, barHeight));
+
+    ImGui::End();
 }

@@ -1,8 +1,8 @@
 CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o: \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.cpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.cpp \
  /usr/include/stdc-predef.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h /usr/include/string.h \
@@ -17,7 +17,7 @@ CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/assert.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.h \
  /usr/include/stdio.h /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
@@ -36,7 +36,7 @@ CMakeFiles/main.dir/imgui/backends/imgui_impl_opengl3.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3_loader.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3_loader.h \
  /usr/include/c++/13/stdlib.h /usr/include/c++/13/cstdlib \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

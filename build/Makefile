@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification"
+CMAKE_SOURCE_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build"
+CMAKE_BINARY_DIR = "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build//CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/build/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target

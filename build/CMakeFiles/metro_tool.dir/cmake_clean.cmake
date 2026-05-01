@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro.pdb"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metro.pdb"
   "CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o"
   "CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o.d"
   "CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o"

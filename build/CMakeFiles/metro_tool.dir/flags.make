@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/eigenlib"
+CXX_INCLUDES = -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/eigenlib"
 
 CXX_FLAGS = -std=gnu++17
 

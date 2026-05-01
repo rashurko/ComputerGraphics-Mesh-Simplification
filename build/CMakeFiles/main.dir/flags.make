@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = -DIMGUI_IMPL_GLFW_DISABLE_WAYLAND
 
-C_INCLUDES = -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib"
+C_INCLUDES = -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/include" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib"
 
 C_FLAGS = 
 
 CXX_DEFINES = -DIMGUI_IMPL_GLFW_DISABLE_WAYLAND
 
-CXX_INCLUDES = -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib"
+CXX_INCLUDES = -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/include" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends" -I"/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib"
 
 CXX_FLAGS = -std=gnu++17
 

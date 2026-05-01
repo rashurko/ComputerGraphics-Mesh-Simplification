@@ -1,7 +1,7 @@
 CMakeFiles/main.dir/stb_image.cpp.o: \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/stb_image.cpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/stb_image.cpp \
  /usr/include/stdc-predef.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/stb_image.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/stb_image.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

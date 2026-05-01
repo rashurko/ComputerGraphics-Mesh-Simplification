@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp" "CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o" "gcc" "CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o.d"
-  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp" "CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o" "gcc" "CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/apps/metro/metro.cpp" "CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o" "gcc" "CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o.d"
+  "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/vcglib/wrap/ply/plylib.cpp" "CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o" "gcc" "CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,8 +1,8 @@
 CMakeFiles/main.dir/main.cpp.o: \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/main.cpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/main.cpp \
  /usr/include/stdc-predef.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include/glad/gl.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glad/include/KHR/khrplatform.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/include/glad/gl.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glad/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -21,8 +21,8 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/local/include/GLFW/glfw3.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/glm.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/_fixes.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/glm.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/_fixes.hpp \
  /usr/include/c++/13/cmath /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -94,10 +94,10 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/tr1/poly_hermite.tcc \
  /usr/include/c++/13/tr1/poly_laguerre.tcc \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/setup.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/c++/13/cstddef \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/../simd/platform.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/../simd/platform.h \
  /usr/include/c++/13/cstdint /usr/include/c++/13/climits \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
@@ -109,32 +109,32 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
  /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/c++/13/cfloat \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/fwd.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/qualifier.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/vec2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec2.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/./compute_vector_relational.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/./setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int2_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../ext/scalar_int_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../ext/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint2_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../ext/scalar_uint_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/vec3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec3.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/compute_vector_decl.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/fwd.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/qualifier.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/vec2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec2.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/./compute_vector_relational.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/./setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int2_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../ext/scalar_int_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../ext/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint2_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../ext/scalar_uint_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/vec3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec3.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/compute_vector_decl.hpp \
  /usr/include/c++/13/functional /usr/include/c++/13/bits/stl_function.h \
  /usr/include/c++/13/backward/binders.h /usr/include/c++/13/tuple \
  /usr/include/c++/13/bits/uses_allocator.h \
@@ -170,171 +170,171 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
  /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/cstdlib \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/_vectorize.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int3_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint3_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/vec4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec4.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int4_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint4_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/mat2x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_double2x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_mat2x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_mat2x2.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../matrix.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat2x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x3.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat2x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x4.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat3x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x2.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat3x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x3.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../common.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/_fixes.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/func_common.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../vector_relational.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_vector_relational.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/compute_common.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat3x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x4.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat4x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x2.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat4x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x3.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x3.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x3_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat4x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x4.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../geometric.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/func_geometric.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../exponential.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_exponential.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x4.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x4_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../detail/func_matrix.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_double2x2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_float2x2.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_float2x2_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/trigonometric.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/func_trigonometric.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/packing.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/func_packing.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/type_half.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/type_half.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/integer.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/detail/func_integer.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/matrix_transform.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_projection.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/constants.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/../ext/scalar_constants.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/../ext/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/../ext/scalar_constants.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/constants.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_projection.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_clip_space.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_clip_space.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_transform.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_transform.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/matrix_transform.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/type_ptr.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/quaternion.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_relational.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_relational.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/type_float.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_common.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../ext/quaternion_geometric.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../ext/quaternion_geometric.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_common.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_float.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/type_quat.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/../ext/quaternion_relational.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/../ext/quaternion_relational.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/type_quat.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_float_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_double.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_double_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_trigonometric.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_trigonometric.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_transform.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_transform.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/quaternion.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/epsilon.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../detail/setup.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/epsilon.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/vec1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_bool1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_bool1_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_float1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_float1_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_double1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_double1_precision.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_int1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_int1_sized.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_uint1.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_uint1_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/_vectorize.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int3_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint3_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/vec4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_vec4.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_bool4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_float4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_double4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_int4_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/vector_uint4_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/mat2x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_double2x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_mat2x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/type_mat2x2.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../matrix.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat2x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x3.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat2x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat2x4.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double2x4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float2x4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat3x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x2.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat3x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x3.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../common.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/_fixes.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/func_common.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../vector_relational.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_vector_relational.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/compute_common.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/type_vec1.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat3x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat3x4.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double3x4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float3x4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat4x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x2.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat4x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x3.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x3.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x3_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../mat4x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/type_mat4x4.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../geometric.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/func_geometric.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../exponential.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/../detail/../detail/../detail/func_exponential.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_double4x4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x4.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/.././ext/matrix_float4x4_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/../detail/../detail/func_matrix.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_double2x2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_float2x2.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/./ext/matrix_float2x2_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/trigonometric.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/func_trigonometric.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/packing.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/func_packing.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/type_half.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/type_half.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/integer.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/detail/func_integer.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/matrix_transform.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_projection.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/constants.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/../ext/scalar_constants.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/../ext/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/../ext/scalar_constants.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/../gtc/constants.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_projection.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_clip_space.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_clip_space.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_transform.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../ext/matrix_transform.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/matrix_transform.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/type_ptr.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/quaternion.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_relational.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_relational.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/type_float.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_common.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../ext/quaternion_geometric.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../ext/quaternion_geometric.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_common.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_float.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/type_quat.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/../ext/quaternion_relational.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/../ext/quaternion_relational.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/../detail/type_quat.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_float_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_double.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_double_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_trigonometric.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_trigonometric.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_transform.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/quaternion_transform.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/quaternion.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/epsilon.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../detail/setup.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/epsilon.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/vec1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_bool1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_bool1_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_float1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_float1_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_double1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_double1_precision.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_int1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_int1_sized.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_uint1.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/../gtc/../ext/vector_uint1_sized.hpp \
  /usr/include/c++/13/cstring /usr/include/string.h /usr/include/strings.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/gtc/type_ptr.inl \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/stb_image.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/glm/gtc/type_ptr.inl \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/stb_image.h \
  /usr/include/stdio.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
@@ -345,7 +345,7 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/c++/13/stdlib.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/OBJ_Loader.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/OBJ_Loader.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/iosfwd \
  /usr/include/c++/13/bits/stringfwd.h /usr/include/c++/13/bits/postypes.h \
@@ -403,16 +403,18 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/fstream \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/algorithm \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/fstream \
  /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/math.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/portable-file-dialogs.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/imgui.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/imconfig.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_opengl3.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/portable-file-dialogs.h \
  /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
@@ -473,8 +475,7 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/bits/atomic_base.h \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/map \
+ /usr/include/c++/13/pstl/glue_memory_defs.h /usr/include/c++/13/map \
  /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h /usr/include/c++/13/set \
  /usr/include/c++/13/bits/stl_set.h \
@@ -503,11 +504,14 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/chrono \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/shader.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/model.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/shader.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/model.hpp \
  /usr/include/c++/13/iomanip /usr/include/c++/13/bits/quoted_string.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/mesh.hpp \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/simplification.hpp \
+ /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
+ /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/codecvt \
+ /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/mesh.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/simplification.hpp \
  /usr/include/c++/13/queue /usr/include/c++/13/bits/stl_queue.h \
  /usr/include/c++/13/optional /usr/include/c++/13/random \
  /usr/include/c++/13/bits/random.h \
@@ -515,9 +519,8 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
  /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/topology_mesh.hpp \
- /usr/include/c++/13/algorithm \
- /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/topology_mesh.hpp \
  /usr/include/c++/13/unordered_set \
  /usr/include/c++/13/bits/unordered_set.h \
- /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/camera.hpp
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/camera.hpp \
+ /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test2/ComputerGraphics-Mesh-Simplification/metrics.hpp
