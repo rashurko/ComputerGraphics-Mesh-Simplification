@@ -11,6 +11,12 @@
 // String - STD String Library
 #include <string>
 
+// Algorithm - STD Algorithm Library
+#include <algorithm>
+
+// cctype - STD Character Helpers
+#include <cctype>
+
 // fStream - STD File I/O Library
 #include <fstream>
 
@@ -431,9 +437,14 @@ namespace objl
 		bool LoadFile(std::string Path)
 		{
 			// If the file is not an .obj file return false
-			if (Path.substr(Path.size() - 4, 4) != ".obj")
+			if (Path.size() < 4)
 				return false;
 
+			std::string extension = Path.substr(Path.size() - 4, 4);
+			std::transform(extension.begin(), extension.end(), extension.begin(),
+				[](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+			if (extension != ".obj")
+				return false;
 
 			std::ifstream file(Path);
 
@@ -1006,7 +1017,13 @@ namespace objl
 		bool LoadMaterials(std::string path)
 		{
 			// If the file is not a material file return false
-			if (path.substr(path.size() - 4, path.size()) != ".mtl")
+			if (path.size() < 4)
+				return false;
+
+			std::string extension = path.substr(path.size() - 4, 4);
+			std::transform(extension.begin(), extension.end(), extension.begin(),
+				[](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+			if (extension != ".mtl")
 				return false;
 
 			std::ifstream file(path);

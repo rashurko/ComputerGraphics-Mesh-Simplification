@@ -15,10 +15,42 @@
 #include "model.hpp"
 #include "camera.hpp"
 
+#include <algorithm>
+#include <cctype>
+#include <filesystem>
 #include <iostream>
+#include <string>
+#include <vector>
+
+std::vector<std::string> discoverModelPaths(const std::string& directory) {
+    std::vector<std::string> paths;
+
+    try {
+        for (const auto& entry : std::filesystem::directory_iterator(directory)) {
+            if (!entry.is_regular_file()) {
+                continue;
+            }
+
+            std::string extension = entry.path().extension().string();
+            std::transform(extension.begin(), extension.end(), extension.begin(),
+                [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+
+            if (extension == ".obj") {
+                paths.push_back(entry.path().generic_string());
+            }
+        }
+    } catch (const std::filesystem::filesystem_error&) {
+        return {};
+    }
+
+    std::sort(paths.begin(), paths.end());
+    return paths;
+}
 
 // Callbacks
 // ---------
+
+bool useGouraudShading = false;
 
 // callback to resize a window
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -41,6 +73,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     static bool mode5PressedLastFrame = false;
     static bool resetPressedLastFrame = false;
     static bool gaussianCurvPressedLastFrame = false;
+    static bool gouraudPressedLastFrame = false;
 
     const bool mode1PressedNow = glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS;
     const bool mode2PressedNow = glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS;
@@ -49,6 +82,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     const bool mode5PressedNow = glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS;
     const bool resetPressedNow = glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS;
     const bool gaussianCurvPressedNow = glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS;
+    const bool gouraudPressedNow = glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS;
 
     if (mode1PressedNow && !mode1PressedLastFrame) {
         model.setSimplificationMode(SimplificationMode::Original);
@@ -84,6 +118,10 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
             }
         }
     }
+    if (gouraudPressedNow && !gouraudPressedLastFrame) {
+        useGouraudShading = !useGouraudShading;
+        std::cout << "Shading: " << (useGouraudShading ? "Gouraud" : "Phong") << std::endl;
+    }
 
     mode1PressedLastFrame = mode1PressedNow;
     mode2PressedLastFrame = mode2PressedNow;
@@ -92,6 +130,7 @@ void processInput(GLFWwindow *window, Camera &cam, Model &model, float deltaTime
     mode5PressedLastFrame = mode5PressedNow;
     resetPressedLastFrame = resetPressedNow;
     gaussianCurvPressedLastFrame = gaussianCurvPressedNow;
+    gouraudPressedLastFrame = gouraudPressedNow;
 
     static bool decimatePressedLastFrame = false;
     const bool decimatePressedNow = glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS;
@@ -212,6 +251,7 @@ int main () {
 
     // Build and compile shaders
     Shader modelShader("model_vs.txt", "model_fs.txt");
+    Shader gouraudShader("gouraud_vs.txt", "gouraud_fs.txt");
     Shader lightShader("model_vs.txt", "light_fs.txt");
 
     // Load the model
@@ -254,30 +294,41 @@ int main () {
         // lookAt matrix
         glm::mat4 view = glm::lookAt(cam.get_cameraPos(), cam.get_cameraPos() + cam.get_cameraFront(), cam.get_cameraUp());
         glm::mat4 projection = glm::perspective(glm::radians(cam.get_fov()), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        ourModel.updateProgressiveLevel(
+            cam.get_cameraPos(),
+            cam.get_cameraFront(),
+            cam.get_cameraUp(),
+            cam.get_fov(),
+            static_cast<float>(SCR_WIDTH) / static_cast<float>(SCR_HEIGHT),
+            model);
 
-        // set the model shader uniforms
-        modelShader.use();
+        // set the active model shader uniforms
+        Shader& activeModelShader = useGouraudShading ? gouraudShader : modelShader;
+        activeModelShader.use();
         // view
-        unsigned int viewLoc = glGetUniformLocation(modelShader.ID, "view");
+        unsigned int viewLoc = glGetUniformLocation(activeModelShader.ID, "view");
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
         // projection
-        unsigned int projectionLoc = glGetUniformLocation(modelShader.ID, "projection");
+        unsigned int projectionLoc = glGetUniformLocation(activeModelShader.ID, "projection");
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
         // light position
-        modelShader.setVec3("lightPos", lightPos.x, lightPos.y, lightPos.z);
+        activeModelShader.setVec3("lightPos", lightPos.x, lightPos.y, lightPos.z);
         // camera position
         glm::vec3 camPos = cam.get_cameraPos();
-        modelShader.setVec3("viewPos", camPos.x, camPos.y, camPos.z);
-        //modelShader.setVec3("lightPos", camPos.x, camPos.y, camPos.z);
+        activeModelShader.setVec3("viewPos", camPos.x, camPos.y, camPos.z);
+        //activeModelShader.setVec3("lightPos", camPos.x, camPos.y, camPos.z);
         // object color
-        modelShader.setVec3("objectColor", 1.0f, 1.0f, 1.0f);
+        activeModelShader.setVec3("objectColor", 1.0f, 1.0f, 1.0f);
         // light color
-        modelShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+        activeModelShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
         // render the loaded model
-        unsigned int modelLoc = glGetUniformLocation(modelShader.ID, "model");
+        unsigned int modelLoc = glGetUniformLocation(activeModelShader.ID, "model");
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-        ourModel.Draw(modelShader);
+        const glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(model)));
+        unsigned int normalMatrixLoc = glGetUniformLocation(activeModelShader.ID, "normalMatrix");
+        glUniformMatrix3fv(normalMatrixLoc, 1, GL_FALSE, glm::value_ptr(normalMatrix));
+        ourModel.Draw(activeModelShader);
 
 
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
@@ -286,23 +337,18 @@ int main () {
 
         if (ImGui::BeginPopup("context_menu")) {
             if (ImGui::BeginMenu("Load")) {
-                const char* bundledModels[] = {
-                    "models/bunny_200.obj",
-                    "models/bunny_1k.obj",
-                    "models/bunny_40k.obj",
-                    "models/complex.obj",
-                    "models/creased_cube.obj",
-                    "models/cube.obj",
-                    "models/l.obj",
-                    "models/open_box.obj",
-                    "models/torus.obj"
-                };
-
-                for (const char* modelPath : bundledModels) {
-                    if (ImGui::MenuItem(modelPath)) {
+                const std::vector<std::string> modelPaths = discoverModelPaths("models");
+                for (const std::string& modelPath : modelPaths) {
+                    if (ImGui::MenuItem(modelPath.c_str())) {
                         ourModel.loadFromPath(modelPath);
                         ourModelPtr = &ourModel;
+                        model = glm::mat4(1.0f);
+                        cam.reset_for_model(ourModel.boundingRadius());
                     }
+                }
+
+                if (modelPaths.empty()) {
+                    ImGui::MenuItem("No .obj files found in models/", nullptr, false, false);
                 }
 
                 ImGui::Separator();
@@ -313,6 +359,8 @@ int main () {
                         std::string newFilePath = dialog.result()[0];
                         ourModel.loadFromPath(newFilePath);
                         ourModelPtr = &ourModel;
+                        model = glm::mat4(1.0f);
+                        cam.reset_for_model(ourModel.boundingRadius());
                     }
                 }
 
@@ -342,6 +390,38 @@ int main () {
         ImGui::Text("Pending collapses: %d", ourModel.pendingCollapseCount());
         ImGui::Text("Active faces: %d", ourModel.activeTriangleCount());
         ImGui::Text("Active edges: %d", ourModel.activeEdgeCount());
+        ImGui::Checkbox("Gouraud shading", &useGouraudShading);
+
+        ImGui::Separator();
+
+        static bool useProgressiveMeshes = false;
+        static int progressiveLevelCount = 6;
+        static float progressiveMinRatio = 0.10f;
+
+        if (!ourModel.isProgressiveMeshesEnabled()) {
+            useProgressiveMeshes = false;
+        }
+
+        if (ImGui::Checkbox("Progressive mesh", &useProgressiveMeshes)) {
+            if (useProgressiveMeshes && !ourModel.hasProgressiveMeshes()) {
+                useProgressiveMeshes = ourModel.buildProgressiveMeshes(progressiveLevelCount, progressiveMinRatio);
+            } else {
+                ourModel.setProgressiveMeshesEnabled(useProgressiveMeshes);
+            }
+        }
+        ImGui::SliderInt("PM levels", &progressiveLevelCount, 2, 8);
+        ImGui::SliderFloat("PM lowest ratio", &progressiveMinRatio, 0.02f, 0.5f);
+        if (ImGui::Button("Build PM")) {
+            useProgressiveMeshes = ourModel.buildProgressiveMeshes(progressiveLevelCount, progressiveMinRatio);
+        }
+        if (ourModel.hasProgressiveMeshes()) {
+            ImGui::Text(
+                "PM LOD: %d/%d | faces: %d | %.0f%%",
+                ourModel.currentProgressiveLevelIndex() + 1,
+                ourModel.progressiveLevelCount(),
+                ourModel.currentProgressiveFaceCount(),
+                ourModel.currentProgressiveDetailRatio() * 100.0f);
+        }
 
         ImGui::Separator();
 
@@ -398,6 +478,8 @@ int main () {
         ImGui::SameLine();
         if (ImGui::Button("Reset")) {
             ourModel.resetSimplification();
+            model = glm::mat4(1.0f);
+            cam.reset_for_model(ourModel.boundingRadius());
         }
 
         ImGui::End();
@@ -431,7 +513,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
         return;
     }
 
-    cam.scroll_callback(window, xoffset, yoffset, cam.dist_origin());
+    const float zoomOutLimit = std::max(100.0f, ourModelPtr->boundingRadius() * 8.0f);
+    cam.scroll_callback(window, xoffset, yoffset, cam.dist_origin(), zoomOutLimit);
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) {

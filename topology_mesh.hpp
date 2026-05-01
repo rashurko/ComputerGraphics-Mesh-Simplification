@@ -28,6 +28,7 @@ struct TopologyVertexNormal {
 struct TopologyFace {
     int id = -1;
     std::array<int, 3> v = { -1, -1, -1 };
+    glm::vec3 color = glm::vec3(1.0f);
     bool active = true;
 };
 
@@ -46,6 +47,7 @@ struct TopologyRenderVertex {
     glm::vec3 position = glm::vec3(0.0f);
     glm::vec3 normal = glm::vec3(0.0f);
     glm::vec2 texCoord = glm::vec2(0.0f);
+    glm::vec3 color = glm::vec3(1.0f);
 };
 
 struct TopologyRenderData {
@@ -87,9 +89,9 @@ public:
         return id;
     }
 
-    int addFace(int a, int b, int c) {
+    int addFace(int a, int b, int c, const glm::vec3& color = glm::vec3(1.0f)) {
         const int id = static_cast<int>(faces.size());
-        faces.push_back({ id, { a, b, c }, true });
+        faces.push_back({ id, { a, b, c }, color, true });
         return id;
     }
 
@@ -381,6 +383,7 @@ public:
                 renderVertex.position = vertices[vid].position;
                 renderVertex.normal = vertexNormals[vid].normal;
                 renderVertex.texCoord = glm::vec2(0.0f);
+                renderVertex.color = face.color;
 
                 renderData.vertices.push_back(renderVertex);
                 renderData.indices.push_back(static_cast<unsigned int>(renderData.indices.size()));
@@ -419,9 +422,20 @@ public:
                 continue;
             }
 
-            for (int vid : face.v) {
+            const glm::vec3& p0 = vertices[face.v[0]].position;
+            const glm::vec3& p1 = vertices[face.v[1]].position;
+            const glm::vec3& p2 = vertices[face.v[2]].position;
+
+            const float cornerAngles[3] = {
+                angleBetween(p1 - p0, p2 - p0),
+                angleBetween(p0 - p1, p2 - p1),
+                angleBetween(p0 - p2, p1 - p2)
+            };
+
+            for (int i = 0; i < 3; ++i) {
+                const int vid = face.v[i];
                 if (isVertexActive(vid)) {
-                    vertexNormals[vid].normal += faceNormals[face.id].normal;
+                    vertexNormals[vid].normal += cornerAngles[i] * faceNormals[face.id].normal;
                     vertexNormals[vid].vertexId = vid;
                 }
             }
@@ -823,6 +837,17 @@ private:
 
     bool isValidVertexId(int vid) const {
         return vid >= 0 && vid < static_cast<int>(vertices.size());
+    }
+
+    float angleBetween(const glm::vec3& a, const glm::vec3& b) const {
+        const float lenA = glm::length(a);
+        const float lenB = glm::length(b);
+        if (lenA < 1e-8f || lenB < 1e-8f) {
+            return 0.0f;
+        }
+
+        const float cosine = std::clamp(glm::dot(a, b) / (lenA * lenB), -1.0f, 1.0f);
+        return std::acos(cosine);
     }
 
     std::int64_t edgeKey(int a, int b) const {

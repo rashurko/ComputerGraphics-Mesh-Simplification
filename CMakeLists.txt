@@ -5,6 +5,8 @@ project(MeshSimplification)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(Eigen3 QUIET)
+
 set(SOURCES
     glad/src/gl.c
     main.cpp
@@ -40,8 +42,13 @@ if(EXISTS ${METRO_SRC})
 
     target_include_directories(metro_tool PRIVATE 
         ${CMAKE_CURRENT_SOURCE_DIR}/vcglib
-        ${CMAKE_CURRENT_SOURCE_DIR}/vcglib/eigenlib
     )
+
+    if(Eigen3_FOUND)
+        target_include_directories(metro_tool PRIVATE ${EIGEN3_INCLUDE_DIR})
+    else()
+        target_include_directories(metro_tool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/vcglib/eigenlib)
+    endif()
 
     set_target_properties(metro_tool PROPERTIES 
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

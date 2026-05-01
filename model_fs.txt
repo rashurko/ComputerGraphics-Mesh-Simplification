@@ -2,6 +2,7 @@
     in vec3 FragPos;
     in vec3 Normal;
     in vec2 TexCoord;
+    in vec3 VertexColor;
 
     out vec4 FragColor;
 
@@ -33,7 +34,7 @@
         vec3 specular = pow(1/dist, 2) * specularStrength * spec * lightColor;
 
         // The resulting color 
-        vec3 result = (ambient + diffuse + specular) * objectColor;
+        vec3 result = (ambient + diffuse + specular) * objectColor * VertexColor;
 
         FragColor = vec4(result, 1.0);
     }

@@ -93,11 +93,11 @@ class Camera {
             }
         }
         // whenever user scrolls the scroll wheel the camera "zooms" in/out
-        void scroll_callback(GLFWwindow* window, double xoffset, double yoffset, float distance) {
+        void scroll_callback(GLFWwindow* window, double xoffset, double yoffset, float distance, float maxDistance = 100.0f) {
             float magnitude = 0.0;
             if (yoffset < 0) {
                 magnitude = -log10(distance + 1);
-                if (distance > 10.0) {
+                if (distance > maxDistance) {
                     magnitude = 0.0;
                 }
             } else if (yoffset > 0) {
@@ -134,6 +134,15 @@ class Camera {
         }
         glm::vec3 get_cameraUp() const {
             return this->camUp;
+        }
+
+        void reset_for_model(float modelRadius) {
+            const float distance = std::max(1.0f, modelRadius * 2.5f);
+            this->camPos = glm::vec3(0.0f, 0.2f, distance);
+            this->camFront = glm::vec3(0.0f, 0.0f, -1.0f);
+            this->camUp = glm::vec3(0.0f, 1.0f, 0.0f);
+            this->zoomVec = this->camFront;
+            this->firstMouse = true;
         }
 
         float get_fov() const {

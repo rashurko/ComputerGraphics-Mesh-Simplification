@@ -248,6 +248,7 @@ public:
     }
 
     TopologyMesh& currentMesh() { return workingMesh; }
+    const TopologyMesh& currentMesh() const { return workingMesh; }
     SimplificationMode mode() const { return currentMode; }
 
 private:
