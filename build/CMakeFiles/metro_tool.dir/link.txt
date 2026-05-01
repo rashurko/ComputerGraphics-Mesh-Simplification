@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o -o "/home/izpodperda/University/Master/Computer Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/metro"  -lpthread 

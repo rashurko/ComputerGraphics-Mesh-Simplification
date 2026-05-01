@@ -318,6 +318,16 @@ int main () {
 
                 ImGui::EndMenu();
             }
+
+            if (ImGui::Button("Save")) {
+                auto dialog = pfd::save_file("Save a 3D Model", ourModel.getOriginalPath(), {"OBJ Files", "*.obj"});
+                auto destination = dialog.result();
+
+                if (!destination.empty()) {
+                    ourModel.saveModel(destination);
+                }
+            }
+
             ImGui::EndPopup();
         }
 
