@@ -129,6 +129,19 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+#=============================================================================
+# Target rules for targets named metro_tool
+
+# Build rule for target.
+metro_tool: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 metro_tool
+.PHONY : metro_tool
+
+# fast build rule for target.
+metro_tool/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/build
+.PHONY : metro_tool/fast
+
 glad/src/gl.o: glad/src/gl.c.o
 .PHONY : glad/src/gl.o
 
@@ -345,6 +358,54 @@ stb_image.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/stb_image.cpp.s
 .PHONY : stb_image.cpp.s
 
+vcglib/apps/metro/metro.o: vcglib/apps/metro/metro.cpp.o
+.PHONY : vcglib/apps/metro/metro.o
+
+# target to build an object file
+vcglib/apps/metro/metro.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.o
+.PHONY : vcglib/apps/metro/metro.cpp.o
+
+vcglib/apps/metro/metro.i: vcglib/apps/metro/metro.cpp.i
+.PHONY : vcglib/apps/metro/metro.i
+
+# target to preprocess a source file
+vcglib/apps/metro/metro.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.i
+.PHONY : vcglib/apps/metro/metro.cpp.i
+
+vcglib/apps/metro/metro.s: vcglib/apps/metro/metro.cpp.s
+.PHONY : vcglib/apps/metro/metro.s
+
+# target to generate assembly for a file
+vcglib/apps/metro/metro.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/vcglib/apps/metro/metro.cpp.s
+.PHONY : vcglib/apps/metro/metro.cpp.s
+
+vcglib/wrap/ply/plylib.o: vcglib/wrap/ply/plylib.cpp.o
+.PHONY : vcglib/wrap/ply/plylib.o
+
+# target to build an object file
+vcglib/wrap/ply/plylib.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.o
+.PHONY : vcglib/wrap/ply/plylib.cpp.o
+
+vcglib/wrap/ply/plylib.i: vcglib/wrap/ply/plylib.cpp.i
+.PHONY : vcglib/wrap/ply/plylib.i
+
+# target to preprocess a source file
+vcglib/wrap/ply/plylib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.i
+.PHONY : vcglib/wrap/ply/plylib.cpp.i
+
+vcglib/wrap/ply/plylib.s: vcglib/wrap/ply/plylib.cpp.s
+.PHONY : vcglib/wrap/ply/plylib.s
+
+# target to generate assembly for a file
+vcglib/wrap/ply/plylib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/metro_tool.dir/build.make CMakeFiles/metro_tool.dir/vcglib/wrap/ply/plylib.cpp.s
+.PHONY : vcglib/wrap/ply/plylib.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -354,6 +415,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... metro_tool"
 	@echo "... glad/src/gl.o"
 	@echo "... glad/src/gl.i"
 	@echo "... glad/src/gl.s"
@@ -381,6 +443,12 @@ help:
 	@echo "... stb_image.o"
 	@echo "... stb_image.i"
 	@echo "... stb_image.s"
+	@echo "... vcglib/apps/metro/metro.o"
+	@echo "... vcglib/apps/metro/metro.i"
+	@echo "... vcglib/apps/metro/metro.s"
+	@echo "... vcglib/wrap/ply/plylib.o"
+	@echo "... vcglib/wrap/ply/plylib.i"
+	@echo "... vcglib/wrap/ply/plylib.s"
 .PHONY : help
 
 

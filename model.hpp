@@ -5,6 +5,8 @@
 #include <vector>
 #include <cmath>
 #include <cstring>
+#include <fstream>
+#include <iomanip>
 #include <unordered_map>
 
 #include <glad/gl.h>
@@ -36,6 +38,14 @@ class Model {
 
         void loadFromPath(const std::string& path) {
             loadModel(path);
+        }
+
+        void saveModel(const std::string& path) {
+            TopologyMesh workingMesh = simplifier.currentMesh();
+
+            if (!path.empty()) {
+                saveMeshToOBJ(workingMesh, path);
+            }
         }
 
         void setSimplificationMode(SimplificationMode mode) {
@@ -199,11 +209,27 @@ class Model {
 
             meshes.emplace_back(renderVertices, renderData.indices, std::vector<Texture>{});
         }
+
+        const std::string getOriginalPath() const {
+            return originalPath;
+        }
+        const std::string getSimplifiedPath() const {
+            return simplifiedPath;
+        }
+
+        const bool isSaved() const {
+            return saved;
+        }
         
     private:
         // model data
         std::vector<Mesh> meshes;
+
         std::string directory;
+        std::string originalPath;
+        std::string simplifiedPath;
+        bool saved = false;
+
         TopologyMesh originalTopology;
         SimplificationController simplifier;
         int pendingCollapses = 0;
@@ -239,6 +265,7 @@ class Model {
             originalTopology.clear();
             pendingCollapses = 0;
             std::unordered_map<PositionKey, int, PositionKeyHasher> topologyVertexMap;
+            originalPath = path;
 
             // Initialize loader
             objl::Loader loader;
@@ -295,6 +322,51 @@ class Model {
             localX = glm::vec3(1.0f, 0.0f, 0.0f);
             localY = glm::vec3(0.0f, 1.0f, 0.0f);
             localZ = glm::vec3(0.0f, 0.0f, 1.0f);
+        }
+
+        void saveMeshToOBJ(const TopologyMesh& mesh, const std::string& filename) {
+            std::ofstream outFile(filename);
+            if (!outFile.is_open()) {
+                std::cerr << "Could not open file for saving: " << filename << std::endl;
+                return;
+            }
+
+            outFile << std::fixed << std::setprecision(6);
+
+            // Map from original vertex ID to the new index in the .obj file
+            std::unordered_map<int, int> oldToNewIndex;
+            int nextIdx = 1;
+
+            const auto& vertices = mesh.getVertices();
+            const auto& faces = mesh.getFaces();
+
+            // Write active vertices
+            for (const auto& v : vertices) {
+                if (v.active) {
+                    outFile << "v " << v.position.x << " "
+                                    << v.position.y << " "
+                                    << v.position.z << "\n";
+                    oldToNewIndex[v.id] = nextIdx;
+                    nextIdx += 1;
+                }
+            }
+
+            // Write active faces
+            for (const auto& f : faces) {
+                if (f.active) {
+                    // Check whether all vertices of this face are valid
+                    if (oldToNewIndex.count(f.v[0]) && oldToNewIndex.count(f.v[1]) && oldToNewIndex.count(f.v[2])) {
+                        outFile << "f " << oldToNewIndex[f.v[0]] << " "
+                                        << oldToNewIndex[f.v[1]] << " "
+                                        << oldToNewIndex[f.v[2]] << "\n";
+                    }
+                }
+            }
+
+            outFile.close();
+            std::cout << "Saved model to " << filename << std::endl;
+            simplifiedPath = filename;
+            saved = true;
         }
 
         PositionKey makePositionKey(const glm::vec3& position) const {

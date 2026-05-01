@@ -1457,6 +1457,7 @@ CMakeFiles/main.dir/main.cpp.o: /home/izpodperda/University/Master/Computer\ Gra
   /usr/include/c++/13/bits/postypes.h \
   /usr/include/c++/13/bits/predefined_ops.h \
   /usr/include/c++/13/bits/ptr_traits.h \
+  /usr/include/c++/13/bits/quoted_string.h \
   /usr/include/c++/13/bits/random.h \
   /usr/include/c++/13/bits/random.tcc \
   /usr/include/c++/13/bits/range_access.h \
@@ -1551,6 +1552,7 @@ CMakeFiles/main.dir/main.cpp.o: /home/izpodperda/University/Master/Computer\ Gra
   /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/iomanip \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
   /usr/include/c++/13/iostream \
@@ -2015,6 +2017,8 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 
 /usr/include/c++/13/iosfwd:
 
+/usr/include/c++/13/iomanip:
+
 /usr/include/c++/13/ext/string_conversions.h:
 
 /usr/include/c++/13/ext/concurrence.h:
@@ -2299,6 +2303,12 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
+/usr/include/c++/13/ext/alloc_traits.h:
+
+/usr/include/c++/13/bits/random.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
 /usr/include/c++/13/tuple:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
@@ -2310,12 +2320,6 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 /usr/lib/gcc/x86_64-linux-gnu/13/include/avxintrin.h:
 
 /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/ext/vector_double3_precision.hpp:
-
-/usr/include/c++/13/ext/alloc_traits.h:
-
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
-/usr/include/c++/13/bits/random.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/idtype_t.h:
 
@@ -2660,6 +2664,8 @@ CMakeFiles/main.dir/stb_image.cpp.o: /home/izpodperda/University/Master/Computer
 /usr/include/c++/13/array:
 
 /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/imgui/backends/imgui_impl_glfw.cpp:
+
+/usr/include/c++/13/bits/quoted_string.h:
 
 /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/glm/ext/matrix_float4x4_precision.hpp:
 

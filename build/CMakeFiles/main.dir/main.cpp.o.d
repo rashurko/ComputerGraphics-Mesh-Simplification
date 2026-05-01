@@ -505,6 +505,7 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/chrono \
  /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/shader.hpp \
  /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/model.hpp \
+ /usr/include/c++/13/iomanip /usr/include/c++/13/bits/quoted_string.h \
  /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/mesh.hpp \
  /home/izpodperda/University/Master/Computer\ Graphics/Project/demo-code+data/test/ComputerGraphics-Mesh-Simplification/simplification.hpp \
  /usr/include/c++/13/queue /usr/include/c++/13/bits/stl_queue.h \
