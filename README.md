@@ -44,19 +44,13 @@ The project uses the following libraries:
 
 ## Build Instructions
 
-### Option 1: Using Make
+
 ```bash
-cd build
+cd build (has to be empty)
+cmake ..
 make
 ```
 
-### Option 2: Manual Compilation
-From the source directory:
-```bash
-g++ -DIMGUI_IMPL_GLFW_DISABLE_WAYLAND main.cpp stb_image.cpp imgui/imgui.cpp imgui/imgui_draw.cpp imgui/imgui_tables.cpp imgui/imgui_widgets.cpp imgui/backends/imgui_impl_glfw.cpp imgui/backendsimgui_impl_opengl3.cpp -o main -I./imgui -I./imgui/backends -lglfw -lglad -ldl
-```
-
----
 
 ## Running the application
 ```bash
